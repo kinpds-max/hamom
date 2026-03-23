@@ -596,6 +596,37 @@
       .contact-box { padding: 40px 24px; }
       footer { flex-direction: column; text-align: center; }
       .stat-item:not(:last-child)::after { display: none; }
+      
+      /* Mobile Optimization Updates */
+      section { padding: 60px 5%; }
+      .section-title { font-size: 2rem; }
+      .hero h1 { font-size: 2.8rem; }
+      .hero-subtitle { font-size: 1.1rem; }
+      
+      .hero-status {
+        position: relative; bottom: auto; right: auto;
+        margin: 30px auto 0; width: 90%; max-width: 320px;
+        animation: fadeIn .8s ease;
+      }
+      .scroll-indicator { display: none; /* Hide scroll indicator on very small screens to avoid clutter */ }
+
+      .pricing-table th, .pricing-table td {
+        padding: 12px 10px; font-size: 0.85rem; white-space: nowrap;
+      }
+      .pricing-table .desc-cell {
+        white-space: normal; min-width: 140px; max-width: 160px; font-size: 0.75rem;
+      }
+      .pricing-table .service-name { font-size: 0.9rem; }
+      .pricing-table .sale-price { font-size: 1rem; padding: 3px 6px; }
+
+      .pricing-banner { padding: 20px; flex-direction: column; text-align: center; gap: 10px; margin-bottom: 30px; }
+      .sale-badge { font-size: 1.8rem; padding: 6px 16px; }
+      .sale-text h3 { font-size: 1.4rem; }
+      
+      .kakao-float {
+        bottom: 20px; right: 20px; width: 50px; height: 50px;
+      }
+      .kakao-float .icon { font-size: 1.5rem; }
     }
 
     /* Gradient card backgrounds */
