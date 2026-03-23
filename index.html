@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>하맘컨텐츠 | 크리에이티브 컨텐츠 프로덕션</title>
+  <meta name="description" content="하맘컨텐츠 - 유튜브 영상, 숏폼, 로고, 배너, 기업CF, 영화, 홈페이지, 플랫폼까지. 당신의 브랜드를 빛나게 만드는 크리에이티브 컨텐츠 에이전시입니다." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #0ea5e9;
+      --primary-dark: #0369a1;
+      --primary-light: #e0f2fe;
+      --accent: #38bdf8;
+      --navy: #ffffff;
+      --navy2: #f8fafc;
+      --card-bg: #ffffff;
+      --border: rgba(14,165,233,0.1);
+      --text: #0f172a;
+      --muted: #64748b;
+      --accent-bg: #f0f9ff;
+      --gold: #0284c7;
+      --gold-light: #38bdf8;
+      --purple: #0ea5e9;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans KR', 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 3px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 6%;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: all .3s ease;
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 2.5px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform .3s ease;
+      user-select: none;
+    }
+    .nav-logo:hover { transform: scale(1.05); }
+    .nav-logo.animate { animation: logoPulse 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+
+    @keyframes logoPulse {
+      0% { transform: scale(1); }
+      30% { transform: scale(1.2) rotate(-3deg); }
+      60% { transform: scale(0.95) rotate(3deg); }
+      100% { transform: scale(1); }
+    }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: .95rem; font-weight: 500; letter-spacing: .5px;
+      transition: all .3s ease;
+    }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff; padding: 12px 28px; border-radius: 12px;
+      font-size: .9rem; font-weight: 600; text-decoration: none;
+      transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 20px rgba(14,165,233,0.25);
+    }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(14,165,233,0.4); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 6% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background-image: 
+        linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)),
+        url('https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=2000&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      opacity: 0.15;
+      background-image: radial-gradient(var(--primary) 0.5px, transparent 0.5px);
+      background-size: 50px 50px;
+    }
+    .hero-orb { display: none; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.05); }
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 900px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #f8fafc; border: 1px solid var(--border);
+      color: var(--primary); padding: 6px 16px; border-radius: 100px;
+      font-size: .8rem; font-weight: 700; letter-spacing: 0.5px;
+      margin-bottom: 32px;
+      animation: fadeInUp .8s ease both;
+    }
+    .hero-badge span { display: inline-block; width: 6px; height: 6px; background: var(--primary); border-radius: 50%; }
+    .hero-title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 1.15;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+      color: #0f172a;
+      animation: fadeInUp .8s .1s ease both;
+    }
+    .hero-title .gold { 
+      background: linear-gradient(to right, var(--primary), var(--primary-dark));
+      -webkit-background-clip: text; 
+      background-clip: text;
+      -webkit-text-fill-color: transparent; 
+      display: inline-block;
+    }
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: #475569; line-height: 1.8;
+      max-width: 700px; margin: 0 auto 48px;
+      font-weight: 400;
+      animation: fadeInUp .8s .2s ease both;
+    }
+    .hero-subtitle strong { color: var(--primary-dark); font-weight: 700; }
+    .hero-btns {
+      display: flex; gap: 18px; justify-content: center; flex-wrap: wrap;
+      animation: fadeInUp .8s .3s ease both;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff; padding: 18px 44px; border-radius: 12px;
+      font-size: 1.05rem; font-weight: 700; text-decoration: none;
+      transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 15px rgba(14, 165, 233, 0.2);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(14, 165, 233, 0.35); }
+    .btn-outline {
+      border: 1.5px solid #e2e8f0; color: #475569;
+      padding: 18px 44px; border-radius: 12px;
+      font-size: 1.05rem; font-weight: 600; text-decoration: none;
+      transition: all .3s;
+      background: white;
+    }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary); background: #f0f9ff; }
+
+    /* ── SCROLL INDICATOR ── */
+    .scroll-indicator {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      z-index: 1; animation: fadeInUp .8s .6s ease both;
+    }
+    .scroll-indicator span { font-size: .75rem; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+    .scroll-line { width: 1px; height: 50px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollLine 2s ease-in-out infinite; }
+    @keyframes scrollLine { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ── AI LIVE STATUS ── */
+    .hero-status {
+      position: absolute; bottom: 40px; right: 6%;
+      background: rgba(255,255,255,0.7); backdrop-filter: blur(12px);
+      border: 1px solid var(--border); border-radius: 16px;
+      padding: 20px; text-align: left; width: 280px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.05); z-index: 5;
+      animation: slideLeft 1s ease;
+    }
+    @keyframes slideLeft { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+    .status-title { font-size: .7rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+    .status-title span { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; display: inline-block; animation: blink 1.5s infinite; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .status-item { font-size: .8rem; color: var(--text); padding: 8px 0; border-top: 1px solid rgba(0,0,0,0.05); }
+    .status-item strong { color: var(--primary-dark); }
+    .status-item:first-of-type { border-top: none; }
+
+    #stats {
+      padding: 60px 6%;
+      background: var(--navy2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .stats-grid {
+      display: flex; justify-content: center; gap: 0;
+      max-width: 900px; margin: 0 auto;
+      flex-wrap: wrap;
+    }
+    .stat-item {
+      flex: 1; min-width: 160px;
+      text-align: center; padding: 20px 30px;
+      position: relative;
+    }
+    .stat-item:not(:last-child)::after {
+      content: ''; position: absolute; right: 0; top: 20%; bottom: 20%;
+      width: 1px; background: var(--border);
+    }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem; line-height: 1;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .stat-label { font-size: .8rem; color: var(--muted); margin-top: 6px; letter-spacing: .5px; }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 100px 6%; }
+    .section-header { text-align: center; margin-bottom: 60px; }
+    .section-label {
+      display: inline-block;
+      font-size: .75rem; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: 2px; line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .section-desc { color: var(--muted); font-size: .95rem; line-height: 1.8; max-width: 600px; margin: 0 auto; }
+
+    /* ── SERVICES ── */
+    #services { background: var(--navy); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px; max-width: 1200px; margin: 0 auto;
+    }
+    .service-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 24px;
+      padding: 40px 32px;
+      position: relative; overflow: hidden;
+      transition: all .4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: default;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+    }
+    .service-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 25px 50px rgba(14, 165, 233, 0.12); }
+    .service-icon {
+      width: 64px; height: 64px; border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; margin-bottom: 24px;
+      position: relative; z-index: 1;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+    }
+    .service-name {
+      font-size: 1.25rem; font-weight: 800;
+      margin-bottom: 12px; position: relative; z-index: 1;
+      color: var(--text);
+    }
+    .service-desc { font-size: .95rem; color: var(--muted); line-height: 1.7; position: relative; z-index: 1; }
+    .service-tag {
+      display: inline-block; margin-top: 20px;
+      background: var(--accent-bg); color: var(--primary-dark);
+      font-size: .8rem; font-weight: 700; padding: 6px 14px;
+      border-radius: 50px; border: 1.5px solid rgba(14,165,233,.15);
+      position: relative; z-index: 1;
+    }
+
+    /* ── PROCESS ── */
+    #process { background: var(--navy2); }
+    .process-steps {
+      display: flex; gap: 0;
+      max-width: 1100px; margin: 0 auto;
+      flex-wrap: wrap;
+    }
+    .process-step {
+      flex: 1; min-width: 200px;
+      text-align: center; padding: 30px 20px;
+      position: relative;
+    }
+    .process-step:not(:last-child)::after {
+      content: '→';
+      position: absolute; right: -12px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--gold); font-size: 1.4rem; z-index: 1;
+    }
+    .process-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem; line-height: 1;
+      background: linear-gradient(135deg, var(--purple), #9d4edd);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 12px;
+    }
+    .process-step h4 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .process-step p { font-size: .82rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── PORTFOLIO ── */
+    #portfolio { background: var(--navy); }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px; max-width: 1200px; margin: 0 auto 40px;
+    }
+    .portfolio-card {
+      border-radius: 24px; overflow: hidden;
+      border: 1.5px solid var(--border);
+      background: var(--card-bg);
+      transition: all .4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      box-shadow: 0 6px 30px rgba(15, 23, 42, 0.04);
+    }
+    .portfolio-card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(14, 165, 233, 0.15); border-color: var(--primary); }
+    .portfolio-thumb {
+      width: 100%; aspect-ratio: 16/9;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem; position: relative; overflow: hidden;
+    }
+    .portfolio-thumb .play-btn {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity .3s;
+      background: rgba(0,0,0,.5);
+    }
+    .portfolio-thumb .play-btn svg { width: 56px; height: 56px; fill: #fff; }
+    .portfolio-card:hover .play-btn { opacity: 1; }
+    .portfolio-info { padding: 26px; background: #fff; }
+    .portfolio-info h4 { font-size: 1.15rem; font-weight: 800; margin-bottom: 8px; color: var(--text); }
+    .portfolio-info p { font-size: .9rem; color: var(--muted); }
+    .portfolio-type {
+      position: absolute; top: 16px; left: 16px;
+      background: rgba(255,255,255,.94); backdrop-filter: blur(12px);
+      color: var(--primary); font-size: .8rem; font-weight: 800;
+      padding: 6px 16px; border-radius: 50px;
+      border: 1.5px solid var(--primary-light);
+      box-shadow: 0 8px 20px rgba(14,165,233,.12);
+      z-index: 5;
+    }
+    .portfolio-cta { text-align: center; }
+    .portfolio-links-grid {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      justify-content: center; max-width: 900px; margin: 0 auto;
+      padding-top: 10px;
+    }
+    .portfolio-link-btn {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.04); border: 1px solid var(--border);
+      border-radius: 50px; padding: 10px 22px;
+      text-decoration: none; color: var(--text);
+      font-size: .88rem; font-weight: 500;
+      transition: all .2s;
+    }
+    .portfolio-link-btn:hover {
+      border-color: var(--gold); color: var(--gold);
+      background: rgba(245,200,66,.07);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(245,200,66,.12);
+    }
+    .portfolio-link-soon { opacity: .5; }
+    .portfolio-link-soon:hover { border-color: var(--purple); color: var(--muted); background: rgba(124,58,237,.07); }
+
+    /* ── WHY ── */
+    #why { background: var(--navy2); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px; max-width: 1100px; margin: 0 auto;
+    }
+    .why-card {
+      padding: 30px; border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .why-card:hover { border-color: rgba(245,200,66,.3); box-shadow: 0 10px 40px rgba(245,200,66,.06); }
+    .why-icon { font-size: 2rem; margin-bottom: 16px; }
+    .why-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
+    .why-card p { font-size: .83rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── PRICING TABLE ── */
+    .pricing-table-container { 
+      margin-top: 50px; overflow-x: auto; 
+      border-radius: 20px; border: 1.5px solid var(--border);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+      background: white;
+    }
+    .pricing-table { 
+      width: 100%; border-collapse: collapse; min-width: 900px;
+    }
+    .pricing-table th, .pricing-table td { 
+      padding: 24px 20px; text-align: left; border-bottom: 1px solid var(--border); 
+    }
+    .pricing-table th { 
+      background: var(--navy2); color: var(--muted); font-size: .85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .pricing-table tr:last-child td { border-bottom: none; }
+    .pricing-table .category-row { 
+      background: var(--accent-bg); font-weight: 800; color: var(--primary-dark); font-size: 1rem;
+    }
+    .pricing-table .service-name { font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 10px; }
+    .pricing-table .original-price { text-decoration: line-through; color: #94a3b8; font-size: .9rem; }
+    .pricing-table .sale-price { 
+      color: var(--primary); font-weight: 800; font-size: 1.15rem; 
+      background: var(--primary-light); padding: 4px 10px; border-radius: 8px;
+    }
+    .pricing-table .price-unit { font-size: .75rem; color: var(--muted); margin-left: 2px; }
+    .pricing-table .desc-cell { color: var(--muted); font-size: .9rem; line-height: 1.5; max-width: 300px; }
+    .pricing-table .note-cell { font-size: .85rem; color: #64748b; font-weight: 500; }
+    .badge-hot { background: #fee2e2; color: #ef4444; font-size: .7rem; padding: 2px 6px; border-radius: 4px; font-weight: 800; }
+    #pricing { background: var(--navy); }
+    .pricing-banner {
+      max-width: 900px; margin: 0 auto 56px;
+      background: linear-gradient(135deg, rgba(239,68,68,.15), rgba(245,200,66,.1));
+      border: 1px solid rgba(239,68,68,.35);
+      border-radius: 20px; padding: 28px 40px;
+      display: flex; align-items: center; justify-content: center; gap: 20px;
+      flex-wrap: wrap; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .pricing-banner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(245,200,66,.04), transparent);
+      animation: shimmer 3s ease infinite;
+    }
+    @keyframes shimmer { 0%,100% { transform: translateX(-100%); } 50% { transform: translateX(100%); } }
+    .sale-badge {
+      background: #ef4444; color: #fff;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem; letter-spacing: 2px;
+      padding: 8px 22px; border-radius: 12px;
+      box-shadow: 0 0 30px rgba(239,68,68,.5);
+      animation: badgePulse 2s ease infinite;
+    }
+    @keyframes badgePulse { 0%,100% { box-shadow: 0 0 20px rgba(239,68,68,.4); } 50% { box-shadow: 0 0 40px rgba(239,68,68,.8); } }
+    .sale-text h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem; letter-spacing: 2px;
+      background: linear-gradient(135deg, #ef4444, var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .sale-text p { font-size: .85rem; color: var(--muted); margin-top: 4px; }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px; max-width: 1100px; margin: 0 auto;
+    }
+    .price-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px 28px;
+      position: relative; overflow: hidden;
+      transition: transform .3s, border-color .3s, box-shadow .3s;
+    }
+    .price-card:hover { transform: translateY(-6px); border-color: rgba(239,68,68,.4); box-shadow: 0 20px 60px rgba(239,68,68,.1); }
+    .price-card.featured {
+      border-color: rgba(245,200,66,.4);
+      background: linear-gradient(135deg, rgba(245,200,66,.06), rgba(124,58,237,.06));
+    }
+    .price-card.featured:hover { border-color: var(--gold); box-shadow: 0 20px 60px rgba(245,200,66,.15); }
+    .price-card-badge {
+      position: absolute; top: 16px; right: 16px;
+      background: #ef4444; color: #fff;
+      font-size: .68rem; font-weight: 800; padding: 4px 10px;
+      border-radius: 50px; letter-spacing: 1px;
+    }
+    .price-card-badge.gold { background: linear-gradient(135deg, var(--gold), #e6a800); color: #0a0a1a; }
+    .price-icon { font-size: 2rem; margin-bottom: 14px; }
+    .price-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+    .price-desc { font-size: .8rem; color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
+    .price-row {
+      display: flex; align-items: flex-end; gap: 10px;
+      margin-bottom: 6px;
+    }
+    .price-original {
+      font-size: 1rem; color: var(--muted);
+      text-decoration: line-through;
+    }
+    .price-now {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem; line-height: 1;
+      background: linear-gradient(135deg, #ef4444, var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .price-unit { font-size: .8rem; color: var(--muted); margin-bottom: 4px; }
+    .price-note { font-size: .75rem; color: var(--muted); margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); }
+    .price-note span { color: var(--gold); font-weight: 600; }
+    .hosting-note {
+      max-width: 1100px; margin: 28px auto 0;
+      background: rgba(124,58,237,.08); border: 1px solid rgba(124,58,237,.2);
+      border-radius: 14px; padding: 16px 24px;
+      display: flex; align-items: center; gap: 12px;
+      font-size: .85rem; color: var(--muted); flex-wrap: wrap;
+    }
+    .hosting-note strong { color: var(--text); }
+
+    .price-card.special-ai {
+      border-color: rgba(6,255,165,.2);
+      background: linear-gradient(135deg, rgba(6,255,165,.03), rgba(124,58,237,.02));
+    }
+    .price-card.special-ai:hover {
+      border-color: #06ffa5;
+      box-shadow: 0 20px 60px rgba(6,255,165,.15);
+    }
+    .price-card.special-ai .price-now {
+      background: linear-gradient(135deg, #06ffa5, #3b82f6);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--navy);
+      text-align: center;
+    }
+    .contact-box {
+      max-width: 700px; margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 60px 48px;
+      position: relative; overflow: hidden;
+    }
+    .contact-box::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--purple), var(--gold), var(--purple));
+    }
+    .contact-box h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.4rem; letter-spacing: 2px; margin-bottom: 14px;
+    }
+    .contact-box p { color: var(--muted); font-size: .95rem; line-height: 1.7; margin-bottom: 36px; }
+    .contact-links { display: flex; flex-direction: column; gap: 14px; max-width: 400px; margin: 0 auto; }
+    .contact-link {
+      display: flex; align-items: center; gap: 14px;
+      background: rgba(255,255,255,.04); border: 1px solid var(--border);
+      border-radius: 14px; padding: 16px 24px;
+      text-decoration: none; color: var(--text);
+      transition: all .2s;
+    }
+    .contact-link:hover { border-color: var(--gold); background: rgba(245,200,66,.06); color: var(--gold); transform: translateX(4px); }
+    .contact-link-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .contact-link-info { text-align: left; }
+    .contact-link-label { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+    .contact-link-value { font-size: .95rem; font-weight: 600; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #06060f;
+      border-top: 1px solid var(--border);
+      padding: 40px 6%;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem; letter-spacing: 2px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .footer-copy { font-size: .8rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: .82rem; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ── MOBILE NAV ── */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: all .3s; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .process-step:not(:last-child)::after { display: none; }
+      .contact-box { padding: 40px 24px; }
+      footer { flex-direction: column; text-align: center; }
+      .stat-item:not(:last-child)::after { display: none; }
+    }
+
+    /* Gradient card backgrounds */
+    .icon-bg-1 { background: linear-gradient(135deg, rgba(124,58,237,.2), rgba(168,85,247,.1)); }
+    .icon-bg-2 { background: linear-gradient(135deg, rgba(245,200,66,.2), rgba(251,146,60,.1)); }
+    .icon-bg-3 { background: linear-gradient(135deg, rgba(6,182,212,.2), rgba(59,130,246,.1)); }
+    .icon-bg-4 { background: linear-gradient(135deg, rgba(236,72,153,.2), rgba(168,85,247,.1)); }
+    .icon-bg-5 { background: linear-gradient(135deg, rgba(16,185,129,.2), rgba(5,150,105,.1)); }
+    .icon-bg-6 { background: linear-gradient(135deg, rgba(245,158,11,.2), rgba(239,68,68,.1)); }
+    /* AI card special style */
+    .service-card.ai-card {
+      border-color: rgba(99,255,200,.15);
+      background: linear-gradient(135deg, rgba(0,255,180,.03), rgba(99,102,241,.05));
+    }
+    .service-card.ai-card:hover {
+      border-color: rgba(99,255,200,.4);
+      box-shadow: 0 20px 60px rgba(99,255,200,.1);
+    }
+    .service-card.ai-card::before {
+      background: linear-gradient(135deg, rgba(0,255,180,.08), transparent);
+    }
+    .icon-bg-ai { background: linear-gradient(135deg, rgba(6,255,165,.25), rgba(99,102,241,.15)); }
+    .ai-divider {
+      grid-column: 1 / -1;
+      display: flex; align-items: center; gap: 16px;
+      margin: 16px 0 4px;
+    }
+    .ai-divider-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(99,255,200,.3), transparent); }
+    .ai-divider-label {
+      display: flex; align-items: center; gap: 8px;
+      font-size: .75rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #06ffa5;
+      white-space: nowrap;
+    }
+    .ai-tag {
+      display: inline-block; margin-top: 16px;
+      background: rgba(6,255,165,.1); color: #06ffa5;
+      font-size: .72rem; font-weight: 600; padding: 4px 12px;
+      border-radius: 50px; border: 1px solid rgba(6,255,165,.25);
+      position: relative; z-index: 1;
+    }
+
+    /* Portfolio thumb backgrounds */
+    .thumb-1 { background: linear-gradient(135deg, #1a0a3e, #2d1b69); }
+    .thumb-2 { background: linear-gradient(135deg, #0a1a0a, #1a3a1a); }
+    .thumb-3 { background: linear-gradient(135deg, #1a0a0a, #3a1a1a); }
+    .thumb-4 { background: linear-gradient(135deg, #0a1a2a, #1a2a3a); }
+    .thumb-5 { background: linear-gradient(135deg, #1a1a0a, #2a2a0a); }
+    .thumb-6 { background: linear-gradient(135deg, #1a0a1a, #2a0a2a); }
+    .thumb-7 { background: linear-gradient(135deg, #0a1a1a, #0a2a2a); }
+
+    /* Portfolio iframe preview */
+    .portfolio-card { cursor: pointer; text-decoration: none; display: block; color: inherit; }
+    .portfolio-iframe-wrap {
+      width: 100%; aspect-ratio: 16/9;
+      position: relative; overflow: hidden;
+      background: #060614;
+    }
+    .portfolio-iframe-wrap iframe {
+      width: 200%; height: 200%;
+      border: none;
+      transform: scale(0.5);
+      transform-origin: top left;
+      pointer-events: none;
+      opacity: .85;
+      transition: opacity .3s;
+    }
+    .portfolio-card:hover .portfolio-iframe-wrap iframe { opacity: 1; }
+    .portfolio-iframe-wrap .iframe-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0);
+      z-index: 2;
+    }
+    .portfolio-card:hover .iframe-overlay { background: rgba(124,58,237,.08); }
+    .visit-btn {
+      position: absolute; bottom: 14px; right: 14px; z-index: 3;
+      background: rgba(0,0,0,.7); backdrop-filter: blur(10px);
+      color: #fff; font-size: .72rem; font-weight: 700;
+      padding: 6px 14px; border-radius: 50px;
+      border: 1px solid rgba(255,255,255,.2);
+      opacity: 0; transition: opacity .3s;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .portfolio-card:hover .visit-btn { opacity: 1; }
+    .yt-thumb {
+      width: 100%; aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #1a0030, #ff0000);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .yt-thumb .yt-logo { font-size: 3.5rem; }
+    .yt-thumb .yt-sub { font-size: .8rem; color: rgba(255,255,255,.7); margin-top: 8px; }
+    /* ── VIDEO MODAL ── */
+    .video-modal {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,0.9);
+      display: none; align-items: center; justify-content: center;
+      backdrop-filter: blur(10px);
+      padding: 20px;
+    }
+    .video-modal.active { display: flex; animation: fadeIn .3s ease; }
+    .video-container {
+      width: 100%; max-width: 1000px;
+      aspect-ratio: 16/9; position: relative;
+      background: #000; border-radius: 12px; overflow: hidden;
+      box-shadow: 0 0 50px rgba(14,165,233,0.3);
+    }
+    .video-container iframe { width: 100%; height: 100%; border: none; }
+    .video-close {
+      position: absolute; top: -50px; right: 0;
+      color: #fff; font-size: 2rem; cursor: pointer;
+      background: none; border: none; padding: 10px;
+      transition: transform .3s;
+    }
+    .video-close:hover { transform: rotate(90deg) scale(1.2); }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* ── FLOATING KAKAO BUTTON ── */
+    .kakao-float {
+      position: fixed; bottom: 30px; right: 30px;
+      width: 65px; height: 65px; background-color: #FEE500;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 1000;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      text-decoration: none; cursor: pointer;
+    }
+    .kakao-float:hover { transform: scale(1.1); }
+    .kakao-float .icon { font-size: 2rem; color: #371D1E; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-logo">하맘컨텐츠</div>
+    <ul class="nav-links">
+      <li><a href="#services">서비스</a></li>
+      <li><a href="#process">제작과정</a></li>
+      <li><a href="#portfolio">포트폴리오</a></li>
+      <li><a href="#why">하맘을 선택해야 하는 이유</a></li>
+      <li><a href="#pricing">가격안내</a></li>
+      <li><a href="#contact">문의하기</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">프로젝트 시작하기</a>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span></span>
+        Creative Content Production
+      </div>
+      <h1 class="hero-title">
+        당신의 브랜드를<br />
+        <span class="gold">빛나게 만듭니다.</span>
+      </h1>
+      <p class="hero-subtitle">
+        유튜브 영상부터 영화, 기업CF, 로고까지<br />
+        <strong>컨텐츠 기획·제작의 모든 것</strong>을 하맘컨텐츠가 함께합니다.
+      </p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">무료 상담 신청하기</a>
+        <a href="#portfolio" class="btn-outline">포트폴리오 보기</a>
+      </div>
+    </div>
+
+    <div class="hero-status">
+      <div class="status-title"><span></span> Live Project Status</div>
+      <div class="status-item">현재 <strong>14개</strong> 프로젝트 진행 중</div>
+      <div class="status-item">최근 납품: <strong>신규 플랫폼 구축</strong> (2시간 전)</div>
+
+    </div>
+
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div id="stats">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-num" data-target="500">0</div>
+        <div class="stat-label">완료 프로젝트</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" data-target="200">0</div>
+        <div class="stat-label">만족한 클라이언트</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" data-target="5">0</div>
+        <div class="stat-label">년 이상 경력</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" data-target="10">0</div>
+        <div class="stat-label">전문 크리에이터 팀</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-header" style="text-align: center;">
+      <div class="section-label">Our Services</div>
+      <h2 class="section-title">하맘컨텐츠의 전문 서비스</h2>
+      <p class="section-desc" style="max-width: 800px; margin: 0 auto;">기획부터 완성까지, 모든 컨텐츠 제작 서비스를 원스톱으로 제공합니다.<br/>AI 자동화 솔루션을 통해 압도적인 효율성과 퀄리티를 경험해보세요.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon icon-bg-6">🖼️</div>
+        <div class="service-name">이미지 · 배너 디자인</div>
+        <div class="service-desc">SNS 피드 이미지, 광고 배너, 인쇄물, 카드뉴스까지. 눈길을 끄는 시각 디자인 전체를 커버합니다.</div>
+        <div class="service-tag">Graphic Design</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon icon-bg-5">✏️</div>
+        <div class="service-name">로고 · 브랜드 디자인</div>
+        <div class="service-desc">브랜드의 철학을 담은 로고, CI/BI 디자인. 기억에 남는 시각 아이덴티티를 만들어 드립니다.</div>
+        <div class="service-tag">Logo Design</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon icon-bg-2">📄</div>
+        <div class="service-name">상세페이지 제작</div>
+        <div class="service-desc">스마트스토어, 쿠팡, 자사몰 등 온라인 쇼핑 플랫폼의 구매 전환율을 높이는 전략적 상세페이지.</div>
+        <div class="service-tag">Product Page</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon icon-bg-1">🌐</div>
+        <div class="service-name">홈페이지 / 웹사이트 제작</div>
+        <div class="service-desc">브랜드에 맞는 감각적인 홈페이지 제작. 반응형 디자인과 SEO 최적화까지 완벽하게 구현합니다.</div>
+        <div class="service-tag">Web Design</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon icon-bg-3">🚀</div>
+        <div class="service-name">웹 플랫폼 제작</div>
+        <div class="service-desc">커머스 플랫폼, 종합 포털, 관리자 대시보드까지. 비즈니스에 딱 맞는 디지털 플랫폼을 구축합니다.</div>
+        <div class="service-tag">Platform Dev</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon icon-bg-4">📱</div>
+        <div class="service-name">모바일 앱 제작</div>
+        <div class="service-desc">iOS·Android 네이티브 앱부터 하이브리드 앱까지. 사용자 경험을 극대화한 모바일 어플리케이션을 제작합니다.</div>
+        <div class="service-tag">App Dev</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon icon-bg-1">🎬</div>
+        <div class="service-name">유튜브 컨텐츠 제작</div>
+        <div class="service-desc">채널 기획부터 촬영, 편집, 썸네일까지. 구독자를 사로잡는 고퀄리티 유튜브 영상을 제작합니다.</div>
+        <div class="service-tag">YouTube</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon icon-bg-2">⚡</div>
+        <div class="service-name">숏폼 영상 제작</div>
+        <div class="service-desc">릴스, 쇼츠, 틱톡용 숏폼 영상. 15초~60초 안에 시청자의 시선을 완전히 장악하는 임팩트 있는 영상.</div>
+        <div class="service-tag">Shorts / Reels</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon icon-bg-4">🎥</div>
+        <div class="service-name">영화·다큐 컨텐츠</div>
+        <div class="service-desc">단편·장편 영화, 다큐멘터리, 웹드라마 등 스토리텔링이 담긴 고품질 영상 컨텐츠를 제작합니다.</div>
+        <div class="service-tag">Film Production</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon icon-bg-3">🎞️</div>
+        <div class="service-name">기업 CF / 광고영상</div>
+        <div class="service-desc">브랜드의 가치를 영상으로 표현합니다. 기업 홍보 영상, 제품 광고 CF, 행사 영상 등 모든 기업 영상 제작.</div>
+        <div class="service-tag">Corporate CF</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">👤</div>
+        <div class="service-name">개인 자동화 솔루션</div>
+        <div class="service-desc">일상의 반복되는 업무와 일정 관리를 자동화하여 소중한 시간을 벌어드립니다. 스마트폰·PC 환경 맞춤형 개인 비서형 솔루션.</div>
+        <div class="service-tag">Personal Automation</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🏢</div>
+        <div class="service-name">기업 자동화 솔루션</div>
+        <div class="service-desc">복잡한 비즈니스 워크플로우를 AI와 RPA로 자동화하여 인적 오류를 줄이고 인건비 절감 및 생산성을 혁신합니다.</div>
+        <div class="service-tag">Business Automation</div>
+      </div>
+
+      <!-- AI 자동화 구분선 -->
+      <div class="ai-divider">
+        <div class="ai-divider-line"></div>
+        <div class="ai-divider-label">⚡ 기업 자동화 시스템 (AI 솔루션)</div>
+        <div class="ai-divider-line"></div>
+      </div>
+
+      <div class="service-card ai-card">
+        <div class="service-icon icon-bg-ai">📝</div>
+        <div class="service-name">자동 글 생성</div>
+        <div class="service-desc">블로그, 뉴스레터, 홍보 문구 등 다양한 목적의 글을 AI가 문맥에 맞게 전문적으로 자동 작성합니다.</div>
+        <div class="ai-tag">⚡ AI Text Generation</div>
+      </div>
+
+      <div class="service-card ai-card">
+        <div class="service-icon icon-bg-ai">🖼️</div>
+        <div class="service-name">자동 이미지 생성</div>
+        <div class="service-desc">텍스트 묘사만으로 고퀄리티 독창적 이미지를 생성. 저작권 걱정 없는 브랜드만의 이미지를 구축합니다.</div>
+        <div class="ai-tag">⚡ AI Image Generation</div>
+      </div>
+
+      <div class="service-card ai-card">
+        <div class="service-icon icon-bg-ai">🎬</div>
+        <div class="service-name">자동 영상 생성</div>
+        <div class="service-desc">스크립트만 있으면 AI가 관련 소스와 자막, 음성을 결합하여 완성도 있는 영상을 자동 제작합니다.</div>
+        <div class="ai-tag">⚡ AI Video Generation</div>
+      </div>
+
+      <div class="service-card ai-card">
+        <div class="service-icon icon-bg-ai">✍️</div>
+        <div class="service-name">자동 블로그 작성기</div>
+        <div class="service-desc">키워드만 입력하면 SEO 최적화된 블로그 포스트를 AI가 자동 생성. 네이버·다음블로그 일괄 게시 가능.</div>
+        <div class="ai-tag">⚡ AI Blog Writer</div>
+      </div>
+
+      <div class="service-card ai-card">
+        <div class="service-icon icon-bg-ai">📸</div>
+        <div class="service-name">자동 인스타 작성기</div>
+        <div class="service-desc">사진·해시태그·캐션을 AI가 자동 생성하여 인스타그램에 바로 예약 게시. 브랜드 피드를 안정적으로 운영.</div>
+        <div class="ai-tag">⚡ AI Insta Writer</div>
+      </div>
+
+      <div class="service-card ai-card">
+        <div class="service-icon icon-bg-ai">🧵</div>
+        <div class="service-name">자동 쓰레드 작성기</div>
+        <div class="service-desc">인스타와 연동되는 쓰레드 게시물을 AI가 자동 생성 및 게시. 텍스트 중심의 소통을 효율적으로 자동화합니다.</div>
+        <div class="ai-tag">⚡ AI Threads Writer</div>
+      </div>
+
+      <div class="service-card ai-card">
+        <div class="service-icon icon-bg-ai">⚡</div>
+        <div class="service-name">자동 트렌드 유튜브 숏폼 제작</div>
+        <div class="service-desc">실시간 인기 트렌드 키워드를 분석하여 클릭률이 높은 숏폼 영상을 AI가 자동으로 대량 생성합니다.</div>
+        <div class="ai-tag">⚡ AI Trending Shorts</div>
+      </div>
+
+      <div class="service-card ai-card">
+        <div class="service-icon icon-bg-ai">🎨</div>
+        <div class="service-name">자동 썸네일 작성기</div>
+        <div class="service-desc">영상 제목과 컨셉만 입력하면 AI가 클릭을 부르는 고퀄리티 유튜브 썸네일을 자동 생성. 클릭률(CTR)을 높여드립니다.</div>
+        <div class="ai-tag">⚡ AI Thumbnail</div>
+      </div>
+
+      <div class="service-card ai-card">
+        <div class="service-icon icon-bg-ai">🏷️</div>
+        <div class="service-name">자동 유튜브 설명 작성기 (메타)</div>
+        <div class="service-desc">영상 내용을 분석하여 SEO 최적화된 제목, 설명란(메타), 타임라인을 AI가 자동 생성하여 노출과 검색 순위를 극대화합니다.</div>
+        <div class="ai-tag">⚡ AI YouTube Meta</div>
+      </div>
+
+      <div class="service-card ai-card">
+        <div class="service-icon icon-bg-ai">🖼️</div>
+        <div class="service-name">자동 블로그 대문 생성기</div>
+        <div class="service-desc">블로그의 첫인상을 결정짓는 대문 이미지를 AI가 주제에 맞춰 감각적으로 제작합니다. 퍼스널 브랜딩의 시작.</div>
+        <div class="ai-tag">⚡ AI Blog Design</div>
+      </div>
+
+      <div class="service-card ai-card">
+        <div class="service-icon icon-bg-ai">🧠</div>
+        <div class="service-name">자동 견적 시스템</div>
+        <div class="service-desc">고객이 조건을 입력하면 AI가 자동으로 견적서를 생성하는 시스템. 업무 효율을 극대화하고 견적 누락을 방지합니다.</div>
+        <div class="ai-tag">⚡ AI Automation</div>
+      </div>
+
+      <div class="service-card ai-card">
+        <div class="service-icon icon-bg-ai">📈</div>
+        <div class="service-name">조회수 늘리기 프로그램</div>
+        <div class="service-desc">유튜브·인스타·블로그 게시물의 노출을 높이는 AI 기반 트래픽 프로그램. 알고리즘 방식 운영으로 자연스러운 성장.</div>
+        <div class="ai-tag">⚡ Traffic Growth</div>
+      </div>
+
+
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="section-header">
+      <div class="section-label">Work Process</div>
+      <h2 class="section-title">하맘컨텐츠 제작 과정</h2>
+      <p class="section-desc">체계적인 프로세스로 최상의 결과물을 약속드립니다.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <h4>상담 & 기획</h4>
+        <p>클라이언트 니즈 파악 후 맞춤형 전략과 컨셉을 기획합니다.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <h4>디자인 & 스크립트</h4>
+        <p>스토리보드, 디자인 시안, 스크립트를 제작하고 확인합니다.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">03</div>
+        <h4>촬영 & 제작</h4>
+        <p>전문 장비와 팀으로 고품질 촬영·디자인을 진행하며, 첨단 AI 기술을 결합하여 더욱 혁신적인 촬영과 제작 결과물을 만들어냅니다.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">04</div>
+        <h4>편집 & 후반작업</h4>
+        <p>색보정, 사운드, 모션그래픽 등 완성도 높은 후반 작업.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">05</div>
+        <h4>납품 & 피드백</h4>
+        <p>최종 검수 후 납품, 수정 및 지속적인 AS를 제공합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio">
+    <!-- 🎬 영상 제작 섹션 -->
+    <div class="section-header" style="margin-bottom: 40px;">
+      <div class="section-label">Video Content</div>
+      <h2 class="section-title">🎬 영상 제작 포트폴리오</h2>
+      <p class="section-desc">브랜드의 가치를 극대화하는 고품질 영상 컨텐츠입니다.</p>
+    </div>
+
+    <div class="portfolio-grid" style="margin-bottom: 60px;">
+      <!-- 🎬 대표 영상 1 -->
+      <a class="portfolio-card" href="https://youtu.be/jsyZoyF8ft4" rel="noopener">
+        <div class="portfolio-thumb" style="aspect-ratio:16/9; position:relative; overflow:hidden;">
+          <img src="https://img.youtube.com/vi/jsyZoyF8ft4/hqdefault.jpg" alt="대표 영상 1" style="width:100%; height:100%; object-fit:cover;">
+          <div class="visit-btn">▶ 영상 보기</div>
+        </div>
+        <div class="portfolio-type">Video Portfolio</div>
+        <div class="portfolio-info">
+          <h4>🎬 대표 영상 1</h4>
+          <p>하맘컨텐츠 고화질 홍보 영상</p>
+        </div>
+      </a>
+
+      <!-- 🎬 대표 영상 2 -->
+      <a class="portfolio-card" href="https://youtu.be/WxWMiqXqhks" rel="noopener">
+        <div class="portfolio-thumb" style="aspect-ratio:16/9; position:relative; overflow:hidden;">
+          <img src="https://img.youtube.com/vi/WxWMiqXqhks/hqdefault.jpg" alt="대표 영상 2" style="width:100%; height:100%; object-fit:cover;">
+          <div class="visit-btn">▶ 영상 보기</div>
+        </div>
+        <div class="portfolio-type">Video Portfolio</div>
+        <div class="portfolio-info">
+          <h4>🎬 대표 영상 2</h4>
+          <p>브랜드 스토리텔링 영상 제작</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- ⚡ 쇼츠 섹션 -->
+    <div class="section-header" style="margin: 60px 0 30px;">
+      <div class="section-label">Viral & Event</div>
+      <h3 class="section-title" style="font-size: 1.8rem;">⚡ 공모전 · 시설 · 기업행사</h3>
+      <p class="section-desc">생생한 현장감과 임팩트를 담은 숏폼 컨텐츠 포트폴리오입니다.</p>
+    </div>
+
+    <div class="portfolio-grid" style="grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); margin-bottom: 80px;">
+      <!-- ⚡ 쇼츠 1 -->
+      <a class="portfolio-card" href="https://youtube.com/shorts/DCvTeossFRY" rel="noopener">
+        <div class="portfolio-thumb" style="aspect-ratio:9/16; position:relative; overflow:hidden;">
+          <img src="https://img.youtube.com/vi/DCvTeossFRY/maxresdefault.jpg" alt="쇼츠 1" style="width:100%; height:100%; object-fit:cover;">
+          <div class="visit-btn">▶ 쇼츠 보기</div>
+        </div>
+        <div class="portfolio-info">
+          <h4>⚡ 쇼츠 1</h4>
+          <p>시선을 사로잡는 숏폼 연출</p>
+        </div>
+      </a>
+
+      <!-- ⚡ 쇼츠 2 -->
+      <a class="portfolio-card" href="https://youtube.com/shorts/nQjA7q_Saxg" rel="noopener">
+        <div class="portfolio-thumb" style="aspect-ratio:9/16; position:relative; overflow:hidden;">
+          <img src="https://img.youtube.com/vi/nQjA7q_Saxg/maxresdefault.jpg" alt="쇼츠 2" style="width:100%; height:100%; object-fit:cover;">
+          <div class="visit-btn">▶ 쇼츠 보기</div>
+        </div>
+        <div class="portfolio-info">
+          <h4>⚡ 쇼츠 2</h4>
+          <p>트렌디한 숏폼 컨텐츠</p>
+        </div>
+      </a>
+
+      <!-- ⚡ 쇼츠 3 -->
+      <a class="portfolio-card" href="https://youtube.com/shorts/Uu__r10OrSk" rel="noopener">
+        <div class="portfolio-thumb" style="aspect-ratio:9/16; position:relative; overflow:hidden;">
+          <img src="https://img.youtube.com/vi/Uu__r10OrSk/maxresdefault.jpg" alt="쇼츠 3" style="width:100%; height:100%; object-fit:cover;">
+          <div class="visit-btn">▶ 쇼츠 보기</div>
+        </div>
+        <div class="portfolio-info">
+          <h4>⚡ 쇼츠 3</h4>
+          <p>임팩트 있는 영상 메시지</p>
+        </div>
+      </a>
+
+      <!-- ⚡ 쇼츠 4 -->
+      <a class="portfolio-card" href="https://youtube.com/shorts/CAPFTHcHQGY" rel="noopener">
+        <div class="portfolio-thumb" style="aspect-ratio:9/16; position:relative; overflow:hidden;">
+          <img src="https://img.youtube.com/vi/CAPFTHcHQGY/maxresdefault.jpg" alt="쇼츠 4" style="width:100%; height:100%; object-fit:cover;">
+          <div class="visit-btn">▶ 쇼츠 보기</div>
+        </div>
+        <div class="portfolio-info">
+          <h4>⚡ 쇼츠 4</h4>
+          <p>트렌디한 숏폼 연출</p>
+        </div>
+      </a>
+
+      <!-- ⚡ 쇼츠 5 -->
+      <a class="portfolio-card" href="https://youtube.com/shorts/MjijYR7NRS8" rel="noopener">
+        <div class="portfolio-thumb" style="aspect-ratio:9/16; position:relative; overflow:hidden;">
+          <img src="https://img.youtube.com/vi/MjijYR7NRS8/maxresdefault.jpg" alt="쇼츠 5" style="width:100%; height:100%; object-fit:cover;">
+          <div class="visit-btn">▶ 쇼츠 보기</div>
+        </div>
+        <div class="portfolio-info">
+          <h4>⚡ 쇼츠 5</h4>
+          <p>다이나믹한 숏폼 구성</p>
+        </div>
+      </a>
+
+      <!-- ⚡ 쇼츠 6 -->
+      <a class="portfolio-card" href="https://youtube.com/shorts/Gxr_RIOAzc0" rel="noopener">
+        <div class="portfolio-thumb" style="aspect-ratio:9/16; position:relative; overflow:hidden;">
+          <img src="https://img.youtube.com/vi/Gxr_RIOAzc0/maxresdefault.jpg" alt="쇼츠 6" style="width:100%; height:100%; object-fit:cover;">
+          <div class="visit-btn">▶ 쇼츠 보기</div>
+        </div>
+        <div class="portfolio-info">
+          <h4>⚡ 쇼츠 6</h4>
+          <p>몰입감 있는 숏폼 비주얼</p>
+        </div>
+      </a>
+
+      <!-- ⚡ 쇼츠 7 -->
+      <a class="portfolio-card" href="https://youtube.com/shorts/Ni0tWrufC8M" rel="noopener">
+        <div class="portfolio-thumb" style="aspect-ratio:9/16; position:relative; overflow:hidden;">
+          <img src="https://img.youtube.com/vi/Ni0tWrufC8M/maxresdefault.jpg" alt="쇼츠 7" style="width:100%; height:100%; object-fit:cover;">
+          <div class="visit-btn">▶ 쇼츠 보기</div>
+        </div>
+        <div class="portfolio-info">
+          <h4>⚡ 쇼츠 7</h4>
+          <p>브랜드 바이럴 숏폼</p>
+        </div>
+      </a>
+
+      <!-- ⚡ 쇼츠 8 -->
+      <a class="portfolio-card" href="https://youtube.com/shorts/P_6-KwK4pI8" rel="noopener">
+        <div class="portfolio-thumb" style="aspect-ratio:9/16; position:relative; overflow:hidden;">
+          <img src="https://img.youtube.com/vi/P_6-KwK4pI8/maxresdefault.jpg" alt="쇼츠 8" style="width:100%; height:100%; object-fit:cover;">
+          <div class="visit-btn">▶ 쇼츠 보기</div>
+        </div>
+        <div class="portfolio-info">
+          <h4>⚡ 쇼츠 8</h4>
+          <p>고효율 SNS 숏폼 제작</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- 🌐 인터넷/앱/플랫폼 섹션 -->
+    <div class="section-header" style="margin-bottom: 40px;">
+      <div class="section-label">Digital Production</div>
+      <h2 class="section-title">🌐 인터넷 / 앱 / 플랫폼 제작</h2>
+      <p class="section-desc">비즈니스의 디지털 확장을 돕는 최적의 빌드업 솔루션입니다.</p>
+    </div>
+
+    <div class="portfolio-grid">
+      <!-- 📱 홀리온 -->
+      <a class="portfolio-card" href="https://kinpds-max.github.io/holyon/app.html" target="_blank" rel="noopener">
+        <div class="portfolio-iframe-wrap">
+          <iframe src="https://kinpds-max.github.io/holyon/app.html" loading="lazy" title="홀리온 크리스찬 채팅앱"></iframe>
+          <div class="iframe-overlay"></div>
+          <div class="visit-btn">↗ 사이트 방문</div>
+        </div>
+        <div class="portfolio-type">모바일 앱</div>
+        <div class="portfolio-info">
+          <h4>📱 홀리온 — 크리스찬 채팅앱</h4>
+          <p>크리스찬 커뮤니티 소셜 플랫폼</p>
+        </div>
+      </a>
+
+      <!-- 🛒 리매트 -->
+      <a class="portfolio-card" href="https://kinpds-max.github.io/refurb/" target="_blank" rel="noopener">
+        <div class="portfolio-iframe-wrap">
+          <iframe src="https://kinpds-max.github.io/refurb/" loading="lazy" title="리매트 리퍼브 플랫폼"></iframe>
+          <div class="iframe-overlay"></div>
+          <div class="visit-btn">↗ 사이트 방문</div>
+        </div>
+        <div class="portfolio-type">커머스 플랫폼</div>
+        <div class="portfolio-info">
+          <h4>🛒 리매트 — 리퍼브 플랫폼</h4>
+          <p>중고/리퍼브 제품 종합 마켓플레이스</p>
+        </div>
+      </a>
+
+      <!-- 🏢 하스놀 -->
+      <a class="portfolio-card" href="https://www.hasnol.kr" target="_blank" rel="noopener">
+        <div class="portfolio-thumb" style="aspect-ratio:16/9; position:relative; overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="하스놀 홈페이지" style="width:100%; height:100%; object-fit:cover;">
+          <div class="visit-btn">↗ 사이트 방문</div>
+        </div>
+        <div class="portfolio-type">기업 홈페이지</div>
+        <div class="portfolio-info">
+          <h4>🏢 하스놀 (HASNOL)</h4>
+          <p>기업 브랜드 홈페이지 디자인 및 구축</p>
+        </div>
+      </a>
+
+      <!-- 🌐 하늘매트 -->
+      <a class="portfolio-card" href="http://WWW.SKYMAT.KR" target="_blank" rel="noopener">
+        <div class="portfolio-thumb" style="aspect-ratio:16/9; position:relative; overflow:hidden;">
+          <img src="C:\Users\hamom\.gemini\antigravity\brain\5f2d5c40-0980-46cb-8be9-85609dc3eb2f\skymat_mockup_1774243889099.png" alt="하늘매트 홈페이지" style="width:100%; height:100%; object-fit:cover;">
+          <div class="visit-btn">↗ 사이트 방문</div>
+        </div>
+        <div class="portfolio-type">기업 홈페이지</div>
+        <div class="portfolio-info">
+          <h4>🌐 하늘매트 (SKYMAT)</h4>
+          <p>제조기업 아이덴티티 반응형 웹사이트</p>
+        </div>
+      </a>
+
+      <!-- 📄 상세페이지 제작 -->
+      <a class="portfolio-card" href="https://smartkim82.github.io/detailpage/" target="_blank" rel="noopener">
+        <div class="portfolio-thumb" style="aspect-ratio:16/9; position:relative; overflow:hidden;">
+          <div style="width:100%; height:100%; background:linear-gradient(135deg, var(--primary-light), #fff); display:flex; align-items:center; justify-content:center; font-size:4rem;">📄</div>
+          <div class="visit-btn">↗ 상세페이지 보기</div>
+        </div>
+        <div class="portfolio-type">상세페이지</div>
+        <div class="portfolio-info">
+          <h4>📄 프리미엄 상세페이지</h4>
+          <p>구매 전환율을 높이는 고퀄리티 디자인</p>
+        </div>
+      </a>
+
+      <!-- 🤖 AI 공모전 모음 -->
+      <a class="portfolio-card" href="https://dynamic-sawine-047477.netlify.app/" target="_blank" rel="noopener">
+        <div class="portfolio-thumb" style="aspect-ratio:16/9; position:relative; overflow:hidden;">
+          <img src="https://kinpds-max.github.io/ai_contest_mockup.jpg" alt="AI 공모전 모음" style="width:100%; height:100%; object-fit:cover;">
+          <div class="visit-btn">↗ 사이트 방문</div>
+        </div>
+        <div class="portfolio-type">웹 서비스</div>
+        <div class="portfolio-info">
+          <h4>🤖 AI 공모전 플랫폼</h4>
+          <p>AI 공모전 종합 대시보드</p>
+        </div>
+      </a>
+
+      <!-- 🏗️ 매트허브 -->
+      <a class="portfolio-card" href="https://smartkim82.github.io/mathub/" target="_blank" rel="noopener">
+        <div class="portfolio-thumb" style="aspect-ratio:16/9; position:relative; overflow:hidden; background:linear-gradient(135deg, #1e293b, #0f172a); display:flex; align-items:center; justify-content:center; color:white;">
+          <span style="font-size:3.5rem;">🏢</span>
+          <div class="visit-btn">↗ 플랫폼 방문</div>
+        </div>
+        <div class="portfolio-type">견적 플랫폼</div>
+        <div class="portfolio-info">
+          <h4>🏗️ 매트허브 (MatHub)</h4>
+          <p>종합 견적 토스 플랫폼 및 매칭 솔루션</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section id="why">
+    <div class="section-header">
+      <div class="section-label">Why Hamam</div>
+      <h2 class="section-title">왜 하맘컨텐츠인가요?</h2>
+      <p class="section-desc">수많은 에이전시 중 하맘컨텐츠를 선택해야 하는 이유가 있습니다.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">🏆</div>
+        <h4>검증된 실력</h4>
+        <p>500개 이상의 프로젝트 완료 경험과 오랜 노하우로 최상의 품질을 보장합니다.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🎯</div>
+        <h4>원스톱 서비스</h4>
+        <p>기획, 촬영, 편집, 디자인, 개발까지 모든 것을 한 팀이 처리합니다. 여러 에이전시를 동시에 관리할 필요 없습니다.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">⚡</div>
+        <h4>빠른 납기</h4>
+        <p>철저한 일정 관리로 약속된 납기를 지킵니다. 급한 프로젝트도 빠르게 대응합니다.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💎</div>
+        <h4>합리적인 가격</h4>
+        <p>고퀄리티 결과물을 합리적인 가격으로 제공합니다. 예산에 맞는 최적의 솔루션을 제안합니다.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🤝</div>
+        <h4>긴밀한 소통</h4>
+        <p>프로젝트 진행 전 과정에서 투명하게 소통하고 클라이언트의 피드백을 적극 반영합니다.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔄</div>
+        <h4>지속적인 AS</h4>
+        <p>납품 후에도 지속적인 유지보수와 수정 지원을 통해 장기적인 파트너가 됩니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="section-header">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">서비스 가격 안내</h2>
+      <p class="section-desc">투명한 가격, 최고의 품질. 지금 특별 할인 이벤트 진행 중!</p>
+    </div>
+
+    <!-- 50% 할인 배너 -->
+    <div class="pricing-banner">
+      <div class="sale-badge">50% OFF</div>
+      <div class="sale-text">
+        <h3>🔥 지금 딱 50% 할인 중!</h3>
+        <p>기간 한정 특별 프로모션 · 지금 바로 문의하고 할인 혜택 받으세요</p>
+      </div>
+    </div>
+
+    <!-- 가격 안내 테이블 -->
+    <div class="pricing-table-container">
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th>서비스 항목</th>
+            <th>상세 내용</th>
+            <th>기존가</th>
+            <th>50% 할인가</th>
+            <th>비고</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Category: 디자인 & 웹 제작 -->
+          <tr class="category-row">
+            <td colspan="5">🎨 디자인 & 웹 기초 제작</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">🖼️ 이미지 · 배너 디자인</div></td>
+            <td class="desc-cell">SNS 광고, 포스터, 유튜브 배너 등 시각 디자인</td>
+            <td class="original-price">60,000원~</td>
+            <td><span class="sale-price">30,000</span><span class="price-unit">원~</span></td>
+            <td class="note-cell">시안 1종 기준</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">✏️ 로고 · 브랜드 디자인</div></td>
+            <td class="desc-cell">브랜드 아이덴티티를 담은 로고 제작 (시안 2종)</td>
+            <td class="original-price">100,000원</td>
+            <td><span class="sale-price">50,000</span><span class="price-unit">원</span></td>
+            <td class="note-cell">수정 2회 포함</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">📄 상세페이지 제작</div></td>
+            <td class="desc-cell">구매 전환율을 높이는 전략적 상세페이지 기획/제작</td>
+            <td class="original-price">200,000원~</td>
+            <td><span class="sale-price">100,000</span><span class="price-unit">원~</span></td>
+            <td class="note-cell">기획 포함 시 협의</td>
+          </tr>
+
+          <!-- Category: 프리미엄 전문가 서비스 -->
+          <tr class="category-row">
+            <td colspan="5">💎 프리미엄 전문가 제작 서비스</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">✍️ 블로그형 홈페이지 제작</div></td>
+            <td class="desc-cell">가성비 높은 블로그 스타일 단일 웹진형 사이트</td>
+            <td class="original-price">100,000원</td>
+            <td><span class="sale-price">50,000</span><span class="price-unit">원</span></td>
+            <td class="note-cell">50% 할인 적용</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">🌐 홈페이지 · 웹사이트</div></td>
+            <td class="desc-cell">브랜드 맞춤형 감각적인 반응형 웹사이트 구축</td>
+            <td class="original-price">300,000원~</td>
+            <td><span class="sale-price">150,000</span><span class="price-unit">원~</span></td>
+            <td class="note-cell">기능별 맞춤 견적</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">🏢 기업형 고급 홈페이지</div></td>
+            <td class="desc-cell">커스텀 디자인 및 고도화 기능을 포함한 엔터프라이즈</td>
+            <td class="original-price">3,000,000원~</td>
+            <td><span class="sale-price">별도 문의</span></td>
+            <td class="note-cell">대단위 프로젝트</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">🚀 웹 플랫폼 제작</div></td>
+            <td class="desc-cell">커머스, 커뮤니티 등 복합 기능형 플랫폼 개발</td>
+            <td class="original-price">협의</td>
+            <td><span class="sale-price">별도 문의</span></td>
+            <td class="note-cell">프로모션 50% 적용</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">📱 모바일 앱 개발</div></td>
+            <td class="desc-cell">iOS/Android 어플리케이션 기획 및 개발</td>
+            <td class="original-price">협의</td>
+            <td><span class="sale-price">별도 문의</span></td>
+            <td class="note-cell">프로모션 50% 적용</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">🎬 유튜브 컨텐츠 제작</div></td>
+            <td class="desc-cell">유튜브 채널 운영을 위한 기획·촬영·편집 일체</td>
+            <td class="original-price">협의</td>
+            <td><span class="sale-price">별도 문의</span></td>
+            <td class="note-cell">프로모션 50% 적용</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">⚡ 숏폼 영상 제작</div></td>
+            <td class="desc-cell">시선을 사로잡는 릴스·쇼츠·틱톡 고효율 영상</td>
+            <td class="original-price">200,000원~</td>
+            <td><span class="sale-price">100,000</span><span class="price-unit">원~</span></td>
+            <td class="note-cell">바이럴 최적화</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">📽️ 영화 · 다큐멘터리</div></td>
+            <td class="desc-cell">영화, 웹드라마, 다큐 등 스토리텔링 영상 컨텐츠</td>
+            <td class="original-price">협의</td>
+            <td><span class="sale-price">별도 문의</span></td>
+            <td class="note-cell">프로모션 50% 적용</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">🎞️ 기업 CF · 홍보영상</div></td>
+            <td class="desc-cell">브랜드 가치를 높이는 고화질 시네마틱 홍보 영상</td>
+            <td class="original-price">협의</td>
+            <td><span class="sale-price">별도 문의</span></td>
+            <td class="note-cell">프로모션 50% 적용</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">👤 개인 자동화 솔루션</div></td>
+            <td class="desc-cell">업무 효율 극대화 및 개인 맞춤형 AI 자동화 세팅</td>
+            <td class="original-price">협의</td>
+            <td><span class="sale-price">별도 문의</span></td>
+            <td class="note-cell">프로모션 50% 적용</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">🏢 기업 자동화 시스템</div></td>
+            <td class="desc-cell">전사 워크플로우 최적화 및 인건비 절감 솔루션</td>
+            <td class="original-price">협의</td>
+            <td><span class="sale-price">별도 문의</span></td>
+            <td class="note-cell">프로모션 50% 적용</td>
+          </tr>
+
+          <!-- Category: AI 핵심 생성 도구 -->
+          <tr class="category-row">
+            <td colspan="5">🧠 AI 핵심 생성 솔루션</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">🖼️ 자동 블로그 대문 생성기</div></td>
+            <td class="desc-cell">브랜드 주제에 맞춘 AI 블로그 배경/대문 자동 제작</td>
+            <td class="original-price">협의</td>
+            <td><span class="sale-price">별도 문의</span></td>
+            <td class="note-cell">퍼스널 브랜딩</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">📝 자동 글 생성</div></td>
+            <td class="desc-cell">다양한 목적의 텍스트 전문 자동 생성</td>
+            <td class="original-price">협의</td>
+            <td><span class="sale-price">별도 문의</span></td>
+            <td class="note-cell">50% 할인 적용</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">🖼️ 자동 이미지 생성</div></td>
+            <td class="desc-cell">상업용 독창적 이미지 AI 생성</td>
+            <td class="original-price">협의</td>
+            <td><span class="sale-price">별도 문의</span></td>
+            <td class="note-cell">50% 할인 적용</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">🎬 자동 영상 생성</div></td>
+            <td class="desc-cell">스크립트 기반 원스톱 영상 제작</td>
+            <td class="original-price">협의</td>
+            <td><span class="sale-price">별도 문의</span></td>
+            <td class="note-cell">50% 할인 적용</td>
+          </tr>
+
+          <!-- Category: 채널 자동화 도구 -->
+          <tr class="category-row">
+            <td colspan="5">⚡ 채널 및 운영 자동화</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">📄 자동 상세페이지</div></td>
+            <td class="desc-cell">품목별 AI 자동 상세페이지 빌더</td>
+            <td class="original-price">400,000원</td>
+            <td><span class="sale-price">200,000</span><span class="price-unit">원</span></td>
+            <td class="note-cell">기획 자동화</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">🚀 자동 홈페이지</div></td>
+            <td class="desc-cell">AI 기반 맞춤형 웹 빌더 구축</td>
+            <td class="original-price">협의</td>
+            <td><span class="sale-price">별도 문의</span></td>
+            <td class="note-cell">도메인 별도</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">📽️ 자동 홍보 영상</div></td>
+            <td class="desc-cell">바이럴용 홍보 영상 대량 생성 시스템</td>
+            <td class="original-price">협의</td>
+            <td><span class="sale-price">별도 문의</span></td>
+            <td class="note-cell">임팩트 중심</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">✍️ 자동 블로그 작성기</div></td>
+            <td class="desc-cell">SEO 최적화 포스팅 무제한 생성</td>
+            <td class="original-price">협의</td>
+            <td><span class="sale-price">별도 문의</span></td>
+            <td class="note-cell">네이버/다음 최적화</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">📸 자동 인스타 작성기</div></td>
+            <td class="desc-cell">이미지+해시태그 자동 예약 게시</td>
+            <td class="original-price">협의</td>
+            <td><span class="sale-price">별도 문의</span></td>
+            <td class="note-cell">안정적 채널 운영</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">🧵 자동 쓰레드 작성기</div></td>
+            <td class="desc-cell">텍스트 기반 쓰레드 게시물 자동화</td>
+            <td class="original-price">협의</td>
+            <td><span class="sale-price">별도 문의</span></td>
+            <td class="note-cell">최신 트렌드 반영</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">⚡ 자동 트렌드 숏폼 제작</div></td>
+            <td class="desc-cell">실시간 트렌드 분석 기반 숏폼 대량 생성</td>
+            <td class="original-price">협의</td>
+            <td><span class="sale-price">별도 문의</span></td>
+            <td class="note-cell">조회수 최적화</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">🎨 자동 썸네일 작성기</div></td>
+            <td class="desc-cell">클릭률을 높이는 AI 디자인 썸네일</td>
+            <td class="original-price">협의</td>
+            <td><span class="sale-price">별도 문의</span></td>
+            <td class="note-cell">CTR 최적화</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">🏷️ 자동 유튜브 설명 작성기</div></td>
+            <td class="desc-cell">SEO 제목, 설명, 태그 자동 생성</td>
+            <td class="original-price">협의</td>
+            <td><span class="sale-price">별도 문의</span></td>
+            <td class="note-cell">노출 알고리즘 반영</td>
+          </tr>
+
+          <!-- Category: 비즈니스 문서 자동화 -->
+          <tr class="category-row">
+            <td colspan="5">📄 비즈니스 문서 솔루션</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">📑 자기소개서 · 이력서</div></td>
+            <td class="desc-cell">개인별 맞춤 고화질 자소서 AI 메이킹</td>
+            <td class="original-price">50,000원</td>
+            <td><span class="sale-price">25,000</span><span class="price-unit">원</span></td>
+            <td class="note-cell">고퀄리티 원고</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">🏢 기업 사업계획서</div></td>
+            <td class="desc-cell">투융자/공모전용 사업계획서 자동 초안</td>
+            <td class="original-price">협의</td>
+            <td><span class="sale-price">별도 문의</span></td>
+            <td class="note-cell">전문 기획 포함</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">📽️ 기업 사업 PT (발표자료)</div></td>
+            <td class="desc-cell">디자인+대본 포함 PT 자료 제작</td>
+            <td class="original-price">협의</td>
+            <td><span class="sale-price">별도 문의</span></td>
+            <td class="note-cell">비즈니스 성공률 UP</td>
+          </tr>
+
+          <!-- Category: 마케팅 부스팅 -->
+          <tr class="category-row">
+            <td colspan="5">📈 마케팅 부스팅 (Last)</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">🚀 조회수 늘리기 프로그램</div></td>
+            <td class="desc-cell">유튜브/인스타 알고리즘 기반 트래픽</td>
+            <td class="original-price">협의</td>
+            <td><span class="sale-price">별도 문의</span></td>
+            <td class="note-cell">안전한 성장 지원</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+    <!-- 호스팅 안내 -->
+    <div class="hosting-note">
+      <span style="font-size:1.2rem;">ℹ️</span>
+      <div>
+        <strong>호스팅 · 도메인 비용은 별도입니다.</strong>
+        도메인 연간 약 1만~3만원 / 호스팅 월 1만~5만원 수준. 필요 시 대행 신청 가능합니다.
+        모든 가격은 <strong>프로모션 가격 기준</strong>이며, 프로젝트 규모·복잡도에 따라 협의 가능합니다.
+      </div>
+    </div>
+
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-box">
+      <h3>프로젝트 시작하기</h3>
+      <p>
+        어떤 컨텐츠든 막막하게 느껴지신다면 하맘컨텐츠와 상담해보세요.<br/>
+        아이디어 단계부터 함께 고민해 드립니다.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:one19119@naver.com" class="contact-link" id="email-contact">
+          <div class="contact-link-icon">📧</div>
+          <div class="contact-link-info">
+            <div class="contact-link-label">이메일 문의</div>
+            <div class="contact-link-value">one19119@naver.com</div>
+          </div>
+        </a>
+        <a href="https://pf.kakao.com/_YdGxhX/chat" target="_blank" class="contact-link" id="kakao-contact">
+          <div class="contact-link-icon">💬</div>
+          <div class="contact-link-info">
+            <div class="contact-link-label">카카오톡 채널</div>
+            <div class="contact-link-value">@하맘</div>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/@하맘" target="_blank" class="contact-link" id="youtube-link">
+          <div class="contact-link-icon">▶️</div>
+          <div class="contact-link-info">
+            <div class="contact-link-label">유튜브 채널</div>
+            <div class="contact-link-value">@하맘</div>
+          </div>
+        </a>
+        <a href="tel:1660-1195" class="contact-link" id="phone-contact">
+          <div class="contact-link-icon">📞</div>
+          <div class="contact-link-info">
+            <div class="contact-link-label">전화 문의</div>
+            <div class="contact-link-value">1660-1195</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <!-- VIDEO MODAL -->
+  <div id="videoModal" class="video-modal" onclick="closeVideo()">
+    <div class="video-container" onclick="event.stopPropagation()">
+      <button class="video-close" onclick="closeVideo()">&times;</button>
+      <iframe id="videoIframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">하맘컨텐츠</div>
+    <div class="footer-copy">© 2026 하맘컨텐츠. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="#services">서비스</a>
+      <a href="#portfolio">포트폴리오</a>
+      <a href="#contact">문의</a>
+    </div>
+  </footer>
+
+  <script>
+    // ── Logo Animation & Scroll Top ──
+    document.querySelector('.nav-logo').addEventListener('click', function() {
+      this.classList.add('animate');
+      setTimeout(() => this.classList.remove('animate'), 600);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ── Video Preview Logic ──
+    function openVideo(url) {
+      const modal = document.getElementById('videoModal');
+      const iframe = document.getElementById('videoIframe');
+      
+      // Powerful ID Extraction for various formats
+      let videoId = '';
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+      
+      if (url.includes('shorts/')) {
+        videoId = url.split('shorts/')[1].split('?')[0];
+      } else if (match && match[2].length == 11) {
+        videoId = match[2];
+      }
+
+      if (videoId) {
+        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeVideo() {
+      const modal = document.getElementById('videoModal');
+      const iframe = document.getElementById('videoIframe');
+      modal.classList.remove('active');
+      iframe.src = '';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Attach click events to portfolio cards that are links to YouTube
+    document.querySelectorAll('.portfolio-card[href*="youtu"]').forEach(card => {
+      card.addEventListener('click', function(e) {
+        e.preventDefault();
+        openVideo(this.href);
+      });
+    });
+
+    // ── Counter animation ──
+    const counters = document.querySelectorAll('.stat-num[data-target]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.getAttribute('data-target'));
+          let count = 0;
+          const step = Math.ceil(target / 60);
+          const timer = setInterval(() => {
+            count = Math.min(count + step, target);
+            el.textContent = count + (target >= 100 ? '+' : '');
+            if (count >= target) clearInterval(timer);
+          }, 25);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => observer.observe(c));
+
+    // ── Scroll fade-in animation ──
+    const fadeEls = document.querySelectorAll('.service-card, .why-card, .portfolio-card, .process-step');
+    const fadeObs = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          fadeObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    fadeEls.forEach((el, i) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = `opacity .5s ${i * 0.05}s ease, transform .5s ${i * 0.05}s ease, border-color .3s, box-shadow .3s`;
+      fadeObs.observe(el);
+    });
+
+    // ── Mobile hamburger ──
+    function toggleMenu() {
+      const links = document.querySelector('.nav-links');
+      links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+      links.style.flexDirection = 'column';
+      links.style.position = 'absolute';
+      links.style.top = '70px';
+      links.style.left = '0';
+      links.style.right = '0';
+      links.style.background = 'rgba(10,10,26,.98)';
+      links.style.padding = '20px';
+      links.style.gap = '16px';
+    }
+
+    // ── Navbar scroll effect ──
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      nav.style.background = window.scrollY > 50
+        ? 'rgba(10,10,26,0.97)'
+        : 'rgba(10,10,26,0.85)';
+    });
+  </script>
+
+  <!-- FLOATING KAKAO BUTTON -->
+  <a href="https://accounts.kakao.com/login/?continue=https%3A%2F%2Fpf.kakao.com%2F_YdGxhX%2Fchat#login" target="_blank" class="kakao-float" aria-label="카카오톡 빠른 상담">
+    <span class="icon">💬</span>
+  </a>
+
+</body>
+</html>
