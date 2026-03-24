@@ -408,6 +408,11 @@
       border-radius: 20px; border: 1.5px solid var(--border);
       box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
       background: white;
+      animation: tableScrollHint 1.8s ease-in-out 1.2s;
+    }
+    @keyframes tableScrollHint {
+      0%, 100% { transform: translateX(0); }
+      30%, 60% { transform: translateX(-30px); }
     }
     .pricing-table { 
       width: 100%; border-collapse: collapse; min-width: 900px;
@@ -463,8 +468,9 @@
       font-size: 1.8rem; letter-spacing: 2px;
       background: linear-gradient(135deg, #ef4444, var(--gold));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      text-wrap: balance; text-align: center;
     }
-    .sale-text p { font-size: .85rem; color: var(--muted); margin-top: 4px; }
+    .sale-text p { font-size: .85rem; color: var(--muted); margin-top: 4px; text-wrap: balance; text-align: center; }
     .pricing-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -643,6 +649,33 @@
       .service-tag, .ai-tag { margin-top: auto; font-size: 0.65rem; padding: 4px 8px; }
       .ai-divider-label { font-size: 0.65rem; letter-spacing: 1px; }
       .section-desc { text-wrap: balance; text-align: center; margin: 0 auto 30px; max-width: 90%; }
+      
+      /* Mobile Table Hint */
+      .pricing-table-container { position: relative; }
+      .pricing-table-container::after {
+        content: '↔ 밀어서 더보기';
+        position: absolute; right: 10px; top: 10px;
+        background: var(--purple); color: #fff;
+        padding: 4px 10px; border-radius: 8px; font-size: 0.7rem;
+        animation: blinkHint 1.5s infinite;
+        pointer-events: none;
+        z-index: 10;
+      }
+      @keyframes blinkHint { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+      
+      /* Pricing Table Swipe Hint */
+      .pricing-table-container { position: relative; }
+      .pricing-table-container::after {
+        content: '↔ 밀어서 더보기';
+        position: absolute; right: 10px; top: 60px;
+        background: var(--purple); color: #fff;
+        padding: 5px 10px; border-radius: 12px; font-size: 0.7rem;
+        font-weight: 700; box-shadow: 0 4px 15px rgba(124,58,237,0.3);
+        animation: tableSwipeHint 1.5s infinite;
+        pointer-events: none;
+        z-index: 10;
+      }
+      @keyframes tableSwipeHint { 0%, 100% { opacity: 1; transform: translateX(0); } 50% { opacity: 0.2; transform: translateX(5px); } }
 
       /* Two columns for portfolio on mobile */
       .portfolio-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
@@ -1538,6 +1571,20 @@
             <td><span class="sale-price">100,000</span><span class="price-unit">원~</span></td>
             <td class="note-cell">기획 포함 시 협의</td>
           </tr>
+          <tr>
+            <td><div class="service-name">💎 고급 상세페이지 제작</div></td>
+            <td class="desc-cell">프리미엄 브랜딩, 전문 기획 및 고퀄리티 디자인 포함</td>
+            <td class="original-price">2,000,000원~</td>
+            <td><span class="sale-price">1,000,000</span><span class="price-unit">원~</span></td>
+            <td class="note-cell">맞춤형 기획/협의</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">💎 고급 상세페이지 제작</div></td>
+            <td class="desc-cell">프리미엄 브랜딩, 전문 기획 및 고퀄리티 디자인 포함</td>
+            <td class="original-price">2,000,000원~</td>
+            <td><span class="sale-price">1,000,000</span><span class="price-unit">원~</span></td>
+            <td class="note-cell">맞춤형 기획/협의</td>
+          </tr>
 
           <!-- Category: 프리미엄 전문가 서비스 -->
           <tr class="category-row">
@@ -2076,7 +2123,7 @@
     fadeEls.forEach((el, i) => {
       el.style.opacity = '0';
       el.style.transform = 'translateY(15px)';
-      el.style.transition = `opacity .15s ease, transform .15s ease`;
+      el.style.transition = `opacity .5s ${i * 0.05}s ease, transform .5s ${i * 0.05}s ease`;
       fadeObs.observe(el);
     });
 
