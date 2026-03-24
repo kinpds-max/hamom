@@ -1363,19 +1363,6 @@
         </div>
       </a>
 
-      <!-- 🤖 인테리어업체 수집자동화 -->
-      <a class="portfolio-card" href="https://youtu.be/Slk7Ra2CO8E?si=GbG1U_LowHPOPtnT" rel="noopener">
-        <div class="portfolio-thumb" style="aspect-ratio:16/9; position:relative; overflow:hidden;">
-          <img src="https://img.youtube.com/vi/Slk7Ra2CO8E/hqdefault.jpg" alt="인테리어 수집자동화 썸네일" style="width:100%; height:100%; object-fit:cover;">
-          <div class="visit-btn">▶ 데모 영상 보기</div>
-        </div>
-        <div class="portfolio-type">수집 자동화</div>
-        <div class="portfolio-info">
-          <h4>🤖 인테리어업체 수집자동화</h4>
-          <p>전국 모든 카테고리 수집 가능 및 제안서 발송 자동화 연동</p>
-        </div>
-      </a>
-
       <!-- 🤖 부동산업체 수집자동화 -->
       <a class="portfolio-card" href="https://youtu.be/_6erMjmE03k?si=AqyGMeKxbKLGiBl7" rel="noopener">
         <div class="portfolio-thumb" style="aspect-ratio:16/9; position:relative; overflow:hidden;">
@@ -1385,6 +1372,19 @@
         <div class="portfolio-type">수집 자동화</div>
         <div class="portfolio-info">
           <h4>🤖 부동산업체 수집자동화</h4>
+          <p>전국 모든 카테고리 수집 가능 및 제안서 발송 자동화 연동</p>
+        </div>
+      </a>
+
+      <!-- 🤖 인테리어업체 수집자동화 -->
+      <a class="portfolio-card" href="https://youtu.be/Slk7Ra2CO8E?si=GbG1U_LowHPOPtnT" rel="noopener">
+        <div class="portfolio-thumb" style="aspect-ratio:16/9; position:relative; overflow:hidden;">
+          <img src="https://img.youtube.com/vi/Slk7Ra2CO8E/hqdefault.jpg" alt="인테리어 수집자동화 썸네일" style="width:100%; height:100%; object-fit:cover;">
+          <div class="visit-btn">▶ 데모 영상 보기</div>
+        </div>
+        <div class="portfolio-type">수집 자동화</div>
+        <div class="portfolio-info">
+          <h4>🤖 인테리어업체 수집자동화</h4>
           <p>전국 모든 카테고리 수집 가능 및 제안서 발송 자동화 연동</p>
         </div>
       </a>
@@ -1858,6 +1858,49 @@
       card.addEventListener('click', function(e) {
         e.preventDefault();
         openVideo(this.href);
+      });
+      
+      // ── Hover to Play Video Logic ──
+      let hoverTimeout;
+      card.addEventListener('mouseenter', function() {
+        const thumb = this.querySelector('.portfolio-thumb');
+        if (!thumb) return;
+        
+        let videoId = '';
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        const match = this.href.match(regExp);
+        if (this.href.includes('shorts/')) {
+          videoId = this.href.split('shorts/')[1].split('?')[0];
+        } else if (match && match[2].length == 11) {
+          videoId = match[2];
+        }
+        
+        if (videoId) {
+          hoverTimeout = setTimeout(() => {
+            if (thumb.querySelector('.hover-video')) return;
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&playlist=${videoId}`;
+            iframe.style.position = 'absolute';
+            iframe.style.top = '0';
+            iframe.style.left = '0';
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.border = 'none';
+            iframe.style.pointerEvents = 'none';
+            iframe.style.zIndex = '2';
+            iframe.classList.add('hover-video');
+            thumb.appendChild(iframe);
+          }, 350); // Mute play starts after 0.35s hover
+        }
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        clearTimeout(hoverTimeout);
+        const thumb = this.querySelector('.portfolio-thumb');
+        if (thumb) {
+          const iframe = thumb.querySelector('.hover-video');
+          if (iframe) iframe.remove();
+        }
       });
     });
 
