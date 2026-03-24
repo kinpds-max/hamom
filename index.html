@@ -267,6 +267,7 @@
       transition: all .4s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: default;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+      display: flex; flex-direction: column; height: 100%;
     }
     .service-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 25px 50px rgba(14, 165, 233, 0.12); }
     .service-icon {
@@ -282,7 +283,7 @@
       margin-bottom: 12px; position: relative; z-index: 1;
       color: var(--text);
     }
-    .service-desc { font-size: .95rem; color: var(--muted); line-height: 1.7; position: relative; z-index: 1; }
+    .service-desc { font-size: .95rem; color: var(--muted); line-height: 1.7; position: relative; z-index: 1; flex-grow: 1; }
     .service-tag {
       display: inline-block; margin-top: 20px;
       background: var(--accent-bg); color: var(--primary-dark);
@@ -350,7 +351,7 @@
     .portfolio-card:hover .play-btn { opacity: 1; }
     .portfolio-info { padding: 26px; background: #fff; }
     .portfolio-info h4 { font-size: 1.15rem; font-weight: 800; margin-bottom: 8px; color: var(--text); }
-    .portfolio-info p { font-size: .9rem; color: var(--muted); }
+    .portfolio-info p { font-size: .9rem; color: var(--muted); flex-grow: 1; }
     .portfolio-type {
       position: absolute; top: 16px; left: 16px;
       background: rgba(255,255,255,.94); backdrop-filter: blur(12px);
@@ -641,6 +642,13 @@
       .service-desc { display: none; /* Hide detailed descriptions on mobile */ }
       .service-tag, .ai-tag { margin-top: auto; font-size: 0.65rem; padding: 4px 8px; }
       .ai-divider-label { font-size: 0.65rem; letter-spacing: 1px; }
+
+      /* Two columns for portfolio on mobile */
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+      .portfolio-info { padding: 12px; }
+      .portfolio-info h4 { font-size: 0.9rem; margin-bottom: 4px; }
+      .portfolio-info p { font-size: 0.75rem; }
+      .portfolio-type { font-size: 0.65rem; padding: 3px 10px; top: 10px; left: 10px; }
     }
 
     /* Gradient card backgrounds */
@@ -652,35 +660,35 @@
     .icon-bg-6 { background: linear-gradient(135deg, rgba(245,158,11,.2), rgba(239,68,68,.1)); }
     /* AI card special style */
     .service-card.ai-card {
-      border-color: rgba(99,255,200,.15);
-      background: linear-gradient(135deg, rgba(0,255,180,.03), rgba(99,102,241,.05));
+      border-color: rgba(99,102,241,.15);
+      background: linear-gradient(135deg, rgba(99,102,241,.03), rgba(124,58,237,.05));
     }
     .service-card.ai-card:hover {
-      border-color: rgba(99,255,200,.4);
-      box-shadow: 0 20px 60px rgba(99,255,200,.1);
+      border-color: rgba(99,102,241,.4);
+      box-shadow: 0 20px 60px rgba(99,102,241,.1);
     }
     .service-card.ai-card::before {
-      background: linear-gradient(135deg, rgba(0,255,180,.08), transparent);
+      background: linear-gradient(135deg, rgba(99,102,241,.08), transparent);
     }
-    .icon-bg-ai { background: linear-gradient(135deg, rgba(6,255,165,.25), rgba(99,102,241,.15)); }
+    .icon-bg-ai { background: linear-gradient(135deg, rgba(99,102,241,.25), rgba(124,58,237,.15)); }
     .ai-divider {
       grid-column: 1 / -1;
       display: flex; align-items: center; gap: 16px;
       margin: 16px 0 4px;
     }
-    .ai-divider-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(99,255,200,.3), transparent); }
+    .ai-divider-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(99,102,241,.3), transparent); }
     .ai-divider-label {
       display: flex; align-items: center; gap: 8px;
       font-size: .75rem; font-weight: 700; letter-spacing: 2px;
       text-transform: uppercase;
-      color: #06ffa5;
+      color: #818cf8;
       white-space: nowrap;
     }
     .ai-tag {
       display: inline-block; margin-top: 16px;
-      background: rgba(6,255,165,.1); color: #06ffa5;
+      background: rgba(129,140,248,.1); color: #818cf8;
       font-size: .72rem; font-weight: 600; padding: 4px 12px;
-      border-radius: 50px; border: 1px solid rgba(6,255,165,.25);
+      border-radius: 50px; border: 1px solid rgba(129,140,248,.25);
       position: relative; z-index: 1;
     }
 
@@ -931,6 +939,20 @@
       </div>
 
       <div class="service-card">
+        <div class="service-icon icon-bg-5">🔍</div>
+        <div class="service-name">SEO 검색등록 대행</div>
+        <div class="service-desc">네이버, 구글 등 주요 포털 사이트에 내 비즈니스를 상위 노출하고, 검색 결과에 최적화된 브랜드 등록을 지원합니다.</div>
+        <div class="service-tag">SEO Optimization</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon icon-bg-6">📤</div>
+        <div class="service-name">데이터 추출 및 발송 대행</div>
+        <div class="service-desc">필요한 타겟 데이터를 정밀하게 추출하고, 맞춤형 제안서 및 홍보물을 자동으로 대량 발송하여 비즈니스 기회를 확대합니다.</div>
+        <div class="service-tag">Data Marketing</div>
+      </div>
+
+      <div class="service-card">
         <div class="service-icon">👤</div>
         <div class="service-name">개인 자동화 솔루션</div>
         <div class="service-desc">일상의 반복되는 업무와 일정 관리를 자동화하여 소중한 시간을 벌어드립니다. 스마트폰·PC 환경 맞춤형 개인 비서형 솔루션.</div>
@@ -1022,17 +1044,17 @@
       </div>
 
       <div class="service-card ai-card">
-        <div class="service-icon icon-bg-ai">🧠</div>
-        <div class="service-name">자동 견적 시스템</div>
-        <div class="service-desc">고객이 조건을 입력하면 AI가 자동으로 견적서를 생성하는 시스템. 업무 효율을 극대화하고 견적 누락을 방지합니다.</div>
-        <div class="ai-tag">⚡ AI Automation</div>
-      </div>
-
-      <div class="service-card ai-card">
         <div class="service-icon icon-bg-ai">🗂️</div>
         <div class="service-name">자동 수집 시스템</div>
         <div class="service-desc">웹 데이터, 트렌드, 잠재 고객 정보 등을 AI가 자동으로 크롤링 및 수집하여 체계적인 데이터베이스로 구축합니다.</div>
         <div class="ai-tag">⚡ AI Data Collection</div>
+      </div>
+
+      <div class="service-card ai-card">
+        <div class="service-icon icon-bg-ai">🧠</div>
+        <div class="service-name">자동 견적 시스템</div>
+        <div class="service-desc">고객이 조건을 입력하면 AI가 자동으로 견적서를 생성하는 시스템. 업무 효율을 극대화하고 견적 누락을 방지합니다.</div>
+        <div class="ai-tag">⚡ AI Automation</div>
       </div>
 
       <div class="service-card ai-card">
@@ -1044,7 +1066,7 @@
 
       <div class="service-card ai-card">
         <div class="service-icon icon-bg-ai">📈</div>
-        <div class="service-name">조회수 늘리기 프로그램</div>
+        <div class="service-name">조회수 증가 프로그램</div>
         <div class="service-desc">유튜브·인스타·블로그 게시물의 노출을 높이는 AI 기반 트래픽 프로그램. 알고리즘 방식 운영으로 자연스러운 성장.</div>
         <div class="ai-tag">⚡ Traffic Growth</div>
       </div>
@@ -1073,7 +1095,7 @@
 
       <div class="service-card ai-card">
         <div class="service-icon icon-bg-ai">📊</div>
-        <div class="service-name">경쟁업체 키워드 추출 (데이터 분석)</div>
+        <div class="service-name">자동 경쟁업체 키워드 추출 (데이터 분석)</div>
         <div class="service-desc">고도화된 데이터분석을 통해 경쟁사의 상위 노출 게시물의 패턴과 기준을 정밀 분석하여, 우리가 가장 먼저 공략해야 할 핵심 타겟 키워드를 완벽하게 추출해 드립니다.</div>
         <div class="ai-tag">⚡ AI Data Analysis</div>
       </div>
