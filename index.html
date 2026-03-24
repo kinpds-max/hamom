@@ -627,6 +627,18 @@
         bottom: 20px; right: 20px; width: 50px; height: 50px;
       }
       .kakao-float .icon { font-size: 1.5rem; }
+
+      /* Compact Services Grid for Mobile */
+      .services-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .service-card { 
+        padding: 20px 12px; border-radius: 16px; 
+        display: flex; flex-direction: column; align-items: center; text-align: center; 
+      }
+      .service-icon { width: 44px; height: 44px; font-size: 1.4rem; margin-bottom: 12px; border-radius: 14px; }
+      .service-name { font-size: 0.95rem; word-break: keep-all; margin-bottom: 8px; line-height: 1.3; }
+      .service-desc { display: none; /* Hide detailed descriptions on mobile */ }
+      .service-tag, .ai-tag { margin-top: auto; font-size: 0.65rem; padding: 4px 8px; }
+      .ai-divider-label { font-size: 0.65rem; letter-spacing: 1px; }
     }
 
     /* Gradient card backgrounds */
