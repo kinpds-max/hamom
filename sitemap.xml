@@ -1,1 +1,7 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>`r`n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`r`n  <url>`r`n    <loc>https://www.hamom.kr/</loc>`r`n    <priority>1.0</priority>`r`n  </url>`r`n</urlset>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.hamom.kr/</loc>
+    <priority>1.0</priority>
+  </url>
+</urlset>
