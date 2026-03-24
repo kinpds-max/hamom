@@ -1910,6 +1910,19 @@
       card.addEventListener('mouseenter', function() {
         const thumb = this.querySelector('.portfolio-thumb');
         if (!thumb) return;
+        
+        // SSL block or heavy loading sites: replace with elegant image zoom effect
+        const isRestricted = this.href.includes('hasnol') || this.href.includes('streamlit') || this.href.includes('skymat');
+        
+        if (isRestricted) {
+          const img = thumb.querySelector('img');
+          if (img) {
+            img.style.transition = 'transform 4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            img.style.transform = 'scale(1.15)';
+          }
+          return; // Skip iframe injection
+        }
+
         // Don't inject if it's already an iframe based card
         if (thumb.querySelector('iframe')) return;
         
@@ -1923,7 +1936,7 @@
           iframe.style.width = '100%';
           iframe.style.height = '100%';
           iframe.style.border = 'none';
-          iframe.style.pointerEvents = 'none';
+          iframe.style.pointerEvents = 'none'; // Ensures the click passes through to the <a> tag
           iframe.style.zIndex = '2';
           iframe.style.background = '#fff';
           iframe.style.opacity = '0';
@@ -1931,7 +1944,7 @@
           iframe.onload = () => { iframe.style.opacity = '1'; };
           iframe.classList.add('hover-iframe');
           thumb.appendChild(iframe);
-        }, 500); // 0.5초 딜레이 후 실시간 웹 렌더링 시작
+        }, 500);
       });
       
       card.addEventListener('mouseleave', function() {
@@ -1940,6 +1953,12 @@
         if (thumb) {
           const iframe = thumb.querySelector('.hover-iframe');
           if (iframe) iframe.remove();
+          
+          const img = thumb.querySelector('img');
+          if (img) {
+            img.style.transition = 'transform 0.5s ease';
+            img.style.transform = 'scale(1)';
+          }
         }
       });
     });
