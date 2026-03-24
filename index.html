@@ -1904,6 +1904,46 @@
       });
     });
 
+    // ── Hover to Preview Website Logic ──
+    document.querySelectorAll('.portfolio-card:not([href*="youtu"])').forEach(card => {
+      let hoverTimeout;
+      card.addEventListener('mouseenter', function() {
+        const thumb = this.querySelector('.portfolio-thumb');
+        if (!thumb) return;
+        // Don't inject if it's already an iframe based card
+        if (thumb.querySelector('iframe')) return;
+        
+        hoverTimeout = setTimeout(() => {
+          if (thumb.querySelector('.hover-iframe')) return;
+          const iframe = document.createElement('iframe');
+          iframe.src = this.href;
+          iframe.style.position = 'absolute';
+          iframe.style.top = '0';
+          iframe.style.left = '0';
+          iframe.style.width = '100%';
+          iframe.style.height = '100%';
+          iframe.style.border = 'none';
+          iframe.style.pointerEvents = 'none';
+          iframe.style.zIndex = '2';
+          iframe.style.background = '#fff';
+          iframe.style.opacity = '0';
+          iframe.style.transition = 'opacity 0.6s ease';
+          iframe.onload = () => { iframe.style.opacity = '1'; };
+          iframe.classList.add('hover-iframe');
+          thumb.appendChild(iframe);
+        }, 500); // 0.5초 딜레이 후 실시간 웹 렌더링 시작
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        clearTimeout(hoverTimeout);
+        const thumb = this.querySelector('.portfolio-thumb');
+        if (thumb) {
+          const iframe = thumb.querySelector('.hover-iframe');
+          if (iframe) iframe.remove();
+        }
+      });
+    });
+
     // ── Counter animation ──
     const counters = document.querySelectorAll('.stat-num[data-target]');
     const observer = new IntersectionObserver((entries) => {
