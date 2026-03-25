@@ -403,12 +403,42 @@
     .why-card p { font-size: .83rem; color: var(--muted); line-height: 1.7; }
 
     /* ── PRICING TABLE ── */
+    .pricing-table-wrapper { position: relative; margin-top: 50px; }
     .pricing-table-container { 
-      margin-top: 50px; overflow-x: auto; 
+      overflow-x: auto; 
       border-radius: 20px; border: 1.5px solid var(--border);
       box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
       background: white;
       animation: tableScrollHint 1.8s ease-in-out 1.2s;
+    }
+    .scroll-hint-sticky {
+      position: sticky;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: none;
+      z-index: 100;
+      background: rgba(10, 10, 26, 0.85);
+      backdrop-filter: blur(10px);
+      color: #f5c842;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      border: 1px solid rgba(245, 200, 66, 0.3);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      white-space: nowrap;
+      pointer-events: none;
+      width: fit-content;
+      margin: -25px auto 30px;
+      animation: hintBounce 2s ease-in-out infinite;
+    }
+    @keyframes hintBounce {
+      0%, 100% { transform: translate(-50%, 0); opacity: 0.9; }
+      50% { transform: translate(-50%, -8px); opacity: 1; }
+    }
+    @media (max-width: 768px) {
+      .scroll-hint-sticky { display: block; }
     }
     @keyframes tableScrollHint {
       0%, 100% { transform: translateX(0); }
@@ -1623,7 +1653,8 @@
     </div>
 
     <!-- 가격 안내 테이블 -->
-    <div class="pricing-table-container">
+    <div class="pricing-table-wrapper">
+      <div class="pricing-table-container">
       <table class="pricing-table">
         <thead>
           <tr>
@@ -1960,7 +1991,9 @@
           </tr>
         </tbody>
       </table>
-    </div>
+      </div> <!-- End of pricing-table-container -->
+      <div class="scroll-hint-sticky">← 옆으로 밀어서 전체 가격 보기 →</div>
+    </div> <!-- End of pricing-table-wrapper -->
 
 
 
