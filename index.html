@@ -411,34 +411,8 @@
       background: white;
       animation: tableScrollHint 1.8s ease-in-out 1.2s;
     }
-    .scroll-hint-sticky {
-      position: sticky;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
+    .mobile-table-hint {
       display: none;
-      z-index: 100;
-      background: rgba(10, 10, 26, 0.85);
-      backdrop-filter: blur(10px);
-      color: #f5c842;
-      padding: 10px 20px;
-      border-radius: 50px;
-      font-size: 0.78rem;
-      font-weight: 800;
-      border: 1px solid rgba(245, 200, 66, 0.3);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-      white-space: nowrap;
-      pointer-events: none;
-      width: fit-content;
-      margin: -25px auto 30px;
-      animation: hintBounce 2s ease-in-out infinite;
-    }
-    @keyframes hintBounce {
-      0%, 100% { transform: translate(-50%, 0); opacity: 0.9; }
-      50% { transform: translate(-50%, -8px); opacity: 1; }
-    }
-    @media (max-width: 768px) {
-      .scroll-hint-sticky { display: block; }
     }
     @keyframes tableScrollHint {
       0%, 100% { transform: translateX(0); }
@@ -681,31 +655,26 @@
       .section-desc { text-wrap: balance; text-align: center; margin: 0 auto 30px; max-width: 90%; }
       
       /* Mobile Table Hint */
-      .pricing-table-container { position: relative; }
-      .pricing-table-container::after {
-        content: '↔ 밀어서 더보기';
-        position: absolute; right: 10px; top: 10px;
-        background: var(--purple); color: #fff;
-        padding: 4px 10px; border-radius: 8px; font-size: 0.7rem;
-        animation: blinkHint 1.5s infinite;
+      .mobile-table-hint {
+        display: block;
+        position: sticky;
+        top: 80px;
+        z-index: 90;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: 15px;
+        background: var(--purple);
+        color: #fff;
+        padding: 5px 12px;
+        border-radius: 12px;
+        font-size: 0.7rem;
+        font-weight: 800;
+        box-shadow: 0 4px 15px rgba(124,58,237,0.3);
+        margin-bottom: -35px;
         pointer-events: none;
-        z-index: 10;
-      }
-      @keyframes blinkHint { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
-      
-      /* Pricing Table Swipe Hint */
-      .pricing-table-container { position: relative; }
-      .pricing-table-container::after {
-        content: '↔ 밀어서 더보기';
-        position: absolute; right: 10px; top: 60px;
-        background: var(--purple); color: #fff;
-        padding: 5px 10px; border-radius: 12px; font-size: 0.7rem;
-        font-weight: 700; box-shadow: 0 4px 15px rgba(124,58,237,0.3);
         animation: tableSwipeHint 1.5s infinite;
-        pointer-events: none;
-        z-index: 10;
       }
-      @keyframes tableSwipeHint { 0%, 100% { opacity: 1; transform: translateX(0); } 50% { opacity: 0.2; transform: translateX(5px); } }
+      @keyframes tableSwipeHint { 0%, 100% { opacity: 1; transform: translateX(0); } 50% { opacity: 0.3; transform: translateX(5px); } }
 
       /* Two columns for portfolio on mobile */
       .portfolio-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
@@ -1654,6 +1623,7 @@
 
     <!-- 가격 안내 테이블 -->
     <div class="pricing-table-wrapper">
+      <div class="mobile-table-hint">↔ 밀어서 더보기</div>
       <div class="pricing-table-container">
       <table class="pricing-table">
         <thead>
@@ -1690,6 +1660,13 @@
             <td class="original-price">200,000원~</td>
             <td><span class="sale-price">100,000</span><span class="price-unit">원~</span></td>
             <td class="note-cell">기획 포함 시 협의</td>
+          </tr>
+          <tr>
+            <td><div class="service-name">👤 개인 프로필 홈페이지</div></td>
+            <td class="desc-cell">브랜딩과 신뢰를 극대화하는 개인 포트폴리오/프로필 웹사이트</td>
+            <td class="original-price">200,000원</td>
+            <td><span class="sale-price">100,000</span><span class="price-unit">원</span></td>
+            <td class="note-cell">50% 할인 런칭 특가!</td>
           </tr>
           <tr>
             <td><div class="service-name">💎 고급 상세페이지 제작</div></td>
@@ -1992,7 +1969,6 @@
         </tbody>
       </table>
       </div> <!-- End of pricing-table-container -->
-      <div class="scroll-hint-sticky">← 옆으로 밀어서 전체 가격 보기 →</div>
     </div> <!-- End of pricing-table-wrapper -->
 
 
