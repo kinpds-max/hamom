@@ -740,35 +740,35 @@
     .icon-bg-6 { background: linear-gradient(135deg, rgba(245,158,11,.2), rgba(239,68,68,.1)); }
     /* AI card special style */
     .service-card.ai-card {
-      border-color: rgba(99,102,241,.15);
-      background: linear-gradient(135deg, rgba(99,102,241,.03), rgba(124,58,237,.05));
+      border-color: rgba(0, 112, 243, 0.1);
+      background: linear-gradient(135deg, #f8faff 0%, #eff6ff 100%);
     }
     .service-card.ai-card:hover {
-      border-color: rgba(99,102,241,.4);
-      box-shadow: 0 20px 60px rgba(99,102,241,.1);
+      border-color: var(--primary);
+      box-shadow: 0 30px 60px rgba(0, 112, 243, 0.15);
     }
     .service-card.ai-card::before {
-      background: linear-gradient(135deg, rgba(99,102,241,.08), transparent);
+      background: linear-gradient(135deg, rgba(0, 112, 243, 0.05), transparent);
     }
-    .icon-bg-ai { background: linear-gradient(135deg, rgba(99,102,241,.25), rgba(124,58,237,.15)); }
+    .icon-bg-ai { background: linear-gradient(135deg, rgba(0, 112, 243, 0.2), rgba(56, 189, 248, 0.15)); }
     .ai-divider {
       grid-column: 1 / -1;
       display: flex; align-items: center; gap: 16px;
       margin: 16px 0 4px;
     }
-    .ai-divider-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(99,102,241,.3), transparent); }
+    .ai-divider-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(0, 112, 243, 0.2), transparent); }
     .ai-divider-label {
       display: flex; align-items: center; gap: 8px;
-      font-size: .75rem; font-weight: 700; letter-spacing: 2px;
+      font-size: .75rem; font-weight: 800; letter-spacing: 2.5px;
       text-transform: uppercase;
-      color: #818cf8;
+      color: var(--primary);
       white-space: nowrap;
     }
     .ai-tag {
       display: inline-block; margin-top: 16px;
-      background: rgba(129,140,248,.1); color: #818cf8;
-      font-size: .72rem; font-weight: 600; padding: 4px 12px;
-      border-radius: 50px; border: 1px solid rgba(129,140,248,.25);
+      background: rgba(0, 112, 243, 0.08); color: var(--primary);
+      font-size: .72rem; font-weight: 700; padding: 4px 12px;
+      border-radius: 50px; border: 1px solid rgba(0, 112, 243, 0.15);
       position: relative; z-index: 1;
     }
 
