@@ -353,7 +353,8 @@
     .process-row:hover { background: var(--primary-light); }
     .process-col-num {
       padding: 40px 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
-      background: var(--navy2); border-right: 1px solid var(--border);
+      background: var(--accent-bg); border-right: 1px solid var(--border);
+      color: var(--primary);
     }
     .process-row:hover .process-col-num { background: var(--primary); color: #fff; }
     .process-num-label { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; line-height: 1; margin-bottom: 4px; }
@@ -725,11 +726,14 @@
         pointer-events: none;
         animation: tableSwipeHint 1.2s ease-in-out infinite;
       }
+      /* Pricing table hint animation */
       @keyframes tableSwipeHint { 
         0%, 100% { transform: translateX(0) scale(1); opacity: 1; } 
         50% { transform: translateX(12px) scale(1.1); opacity: 0.8; } 
       }
       .portfolio-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+      
+      .ai-column-grid { grid-template-columns: 1fr !important; }
       .portfolio-info { padding: 12px; }
       .portfolio-info h4 { font-size: 0.9rem; margin-bottom: 4px; }
       .portfolio-info p { font-size: 0.75rem; }
@@ -760,8 +764,8 @@
       box-shadow: 0 40px 80px rgba(0, 112, 243, 0.08);
     }
     .service-card.ai-card .service-name { color: var(--text); }
-    .service-card.ai-card .service-icon { background: var(--navy2); filter: grayscale(100%) brightness(0); border: none; }
-    .service-card.ai-card:hover .service-icon { background: #000; color: #fff; filter: none; }
+    .service-card.ai-card .service-icon { background: var(--navy2); border: none; }
+    .service-card.ai-card:hover .service-icon { background: var(--primary); color: #fff; filter: none; }
     .icon-bg-ai { background: linear-gradient(135deg, rgba(0, 112, 243, 0.2), rgba(56, 189, 248, 0.15)); }
     .ai-divider {
       grid-column: 1 / -1;
@@ -1008,7 +1012,7 @@
       <div class="section-label">Our Services</div>
       <h2 class="section-title">하맘컨텐츠의 전문 서비스</h2>
       <p class="section-desc" style="max-width: 800px; margin: 0 auto;">기획부터 완성까지, 모든 컨텐츠 제작 서비스를 원스톱으로 제공합니다.<br/>AI 자동화 솔루션을 통해 압도적인 효율성과 퀄리티를 경험해보세요.</p>
-      <div class="global-service-hint" style="margin-top: 30px; background: #0070f3; color: #fff; border: none; box-shadow: 0 10px 30px rgba(0, 112, 243, 0.3);">💡 각 카드를 클릭하시면 상세 내용을 보실 수 있습니다</div>
+      <div class="global-service-hint" style="margin-top: 30px; background: #0070f3; color: #fff; border: none; box-shadow: 0 10px 30px rgba(0, 112, 243, 0.3); white-space: nowrap;">💡 클릭하시면 상세 내용을 보실 수 있습니다</div>
     </div>
     <div class="services-grid">
       <div class="service-card">
@@ -1116,13 +1120,16 @@
         <div class="service-tag">Business Automation</div>
       </div>
 
-      <!-- AI 자동화 구분선 -->
-      <div class="ai-divider">
-        <div class="ai-divider-line"></div>
-        <div class="ai-divider-label">⚡ 기업 자동화 시스템 (AI 솔루션)</div>
-        <div class="ai-divider-line"></div>
-      </div>
+    </div> <!-- Close primary services grid -->
 
+    <!-- AI 자동화 구분선 -->
+    <div class="ai-divider">
+      <div class="ai-divider-line"></div>
+      <div class="ai-divider-label">⚡ 기업 자동화 시스템 (AI 솔루션)</div>
+      <div class="ai-divider-line"></div>
+    </div>
+
+    <div class="services-grid ai-column-grid">
       <div class="service-card ai-card">
         <div class="service-icon icon-bg-ai">📝</div>
         <div class="service-name">자동 글 생성</div>
@@ -1715,7 +1722,6 @@
       <div class="section-label">Pricing</div>
       <h2 class="section-title">
         서비스 가격 안내
-        <div class="mobile-table-hint" style="display:inline-flex; vertical-align:middle; position:relative; top:-5px; margin-left:10px; margin-bottom:0;">↔ 밀어서 더보기</div>
       </h2>
       <p class="section-desc">투명한 가격, 최고의 품질. 지금 특별 할인 이벤트 진행 중!</p>
     </div>
@@ -1745,7 +1751,10 @@
         <tbody>
           <!-- Category: 디자인 & 웹 제작 -->
           <tr class="category-row">
-            <td colspan="5">🎨 디자인 & 웹 기초 제작</td>
+            <td colspan="5">
+              🎨 디자인 & 웹 기초 제작
+              <span class="mobile-table-hint" style="display:inline-flex; vertical-align:middle; position:relative; top:-2px; margin-left:12px; background:var(--primary); color:#fff; border-radius:50px; font-size:0.7rem; padding:4px 12px; font-weight:900; box-shadow: 0 4px 10px rgba(0, 112, 243, 0.3);">밀어서 더보기 ↔</span>
+            </td>
           </tr>
           <tr>
             <td><div class="service-name">🖼️ 이미지 · 배너 디자인</div></td>
@@ -1769,7 +1778,7 @@
             <td class="note-cell">기획 포함 시 협의</td>
           </tr>
           <tr>
-            <td><div class="service-name">👤 개인프로필홈페이지</div></td>
+            <td><div class="service-name">👤 개인 프로필홈페이지</div></td>
             <td class="desc-cell">브랜딩과 신뢰를 극대화하는 개인 포트폴리오/프로필 웹사이트</td>
             <td class="original-price">200,000원</td>
             <td><span class="sale-price">100,000</span><span class="price-unit">원</span></td>
