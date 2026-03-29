@@ -867,15 +867,20 @@
 
     /* ── FLOATING KAKAO BUTTON ── */
     .kakao-float {
-      position: fixed; bottom: 30px; right: 45px;
-      width: 65px; height: 65px; background-color: #FEE500;
+      position: fixed; bottom: 35px; right: 35px;
+      width: 60px; height: 60px; 
+      background: linear-gradient(135deg, #FEE500 0%, #F5D000 100%);
       border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 1000;
-      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      text-decoration: none; cursor: pointer;
+      box-shadow: 0 10px 30px rgba(254, 229, 0, 0.4), 0 4px 10px rgba(0,0,0,0.1); 
+      z-index: 1000;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      text-decoration: none; border: 2px solid rgba(255,255,255,0.4);
     }
-    .kakao-float:hover { transform: scale(1.1); }
-    .kakao-float .icon { font-size: 2rem; color: #371D1E; }
+    .kakao-float:hover { 
+      transform: scale(1.1) rotate(5deg); 
+      box-shadow: 0 15px 40px rgba(254, 229, 0, 0.6);
+    }
+    .kakao-float .icon { font-size: 1.8rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
 
     /* ── COUPON MODAL ── */
     .coupon-modal {
@@ -1337,29 +1342,29 @@
     </div>
 
     <div class="portfolio-grid" style="margin-bottom: 60px;">
-      <!-- 🎬 대표 영상 1 -->
-      <a class="portfolio-card" href="https://youtu.be/jsyZoyF8ft4" rel="noopener">
+      <!-- 🎬 대표 영상 2 (WxWMiqXqhks) -> 행사홍보영상 -->
+      <a class="portfolio-card" href="https://youtu.be/WxWMiqXqhks" rel="noopener">
         <div class="portfolio-thumb" style="aspect-ratio:16/9; position:relative; overflow:hidden;">
-          <img src="https://img.youtube.com/vi/jsyZoyF8ft4/hqdefault.jpg" alt="대표 영상 1" style="width:100%; height:100%; object-fit:cover;">
+          <img src="https://img.youtube.com/vi/WxWMiqXqhks/hqdefault.jpg" alt="행사홍보영상" style="width:100%; height:100%; object-fit:cover;">
           <div class="visit-btn">▶ 영상 보기</div>
         </div>
         <div class="portfolio-type">Video Portfolio</div>
         <div class="portfolio-info">
-          <h4>🎬 대표 영상 1</h4>
-          <p>회사 홈페이지 무빙포스터</p>
+          <h4>🎬 행사 홍보 영상</h4>
+          <p>브랜드 스토리텔링 및 대규모 행사 홍보 영상 제작</p>
         </div>
       </a>
 
-      <!-- 🎬 대표 영상 2 -->
-      <a class="portfolio-card" href="https://youtu.be/WxWMiqXqhks" rel="noopener">
+      <!-- 🎬 대표 영상 1 (jsyZoyF8ft4) -> 회사무빙배너 -->
+      <a class="portfolio-card" href="https://youtu.be/jsyZoyF8ft4" rel="noopener">
         <div class="portfolio-thumb" style="aspect-ratio:16/9; position:relative; overflow:hidden;">
-          <img src="https://img.youtube.com/vi/WxWMiqXqhks/hqdefault.jpg" alt="대표 영상 2" style="width:100%; height:100%; object-fit:cover;">
+          <img src="https://img.youtube.com/vi/jsyZoyF8ft4/hqdefault.jpg" alt="회사무빙배너" style="width:100%; height:100%; object-fit:cover;">
           <div class="visit-btn">▶ 영상 보기</div>
         </div>
         <div class="portfolio-type">Video Portfolio</div>
         <div class="portfolio-info">
-          <h4>🎬 대표 영상 2</h4>
-          <p>브랜드 스토리텔링 영상 제작</p>
+          <h4>🎬 회사 홈페이지 무빙배너</h4>
+          <p>기업 아이덴티티를 담은 감각적인 무빙 포스터 제작</p>
         </div>
       </a>
     </div>
@@ -1379,8 +1384,8 @@
           <div class="visit-btn">▶ 쇼츠 보기</div>
         </div>
         <div class="portfolio-info">
-          <h4>⚡ 쇼츠 1</h4>
-          <p>시선을 사로잡는 숏폼 연출</p>
+          <h4>⚡ 역동적인 행사 현장 스케치</h4>
+          <p>생생한 열기를 담은 감각적인 현장 편집</p>
         </div>
       </a>
 
@@ -1391,8 +1396,8 @@
           <div class="visit-btn">▶ 쇼츠 보기</div>
         </div>
         <div class="portfolio-info">
-          <h4>⚡ 쇼츠 2</h4>
-          <p>트렌디한 숏폼 컨텐츠</p>
+          <h4>⚡ 감각적인 인테리어 필름</h4>
+          <p>공간의 가치를 높이는 트렌디한 영상미</p>
         </div>
       </a>
 
@@ -1403,8 +1408,8 @@
           <div class="visit-btn">▶ 쇼츠 보기</div>
         </div>
         <div class="portfolio-info">
-          <h4>⚡ 쇼츠 3</h4>
-          <p>임팩트 있는 영상 메시지</p>
+          <h4>⚡ 몰입감 넘치는 브랜드 스토리</h4>
+          <p>시선을 사로잡는 강력한 메시지 전달</p>
         </div>
       </a>
 
@@ -1415,8 +1420,8 @@
           <div class="visit-btn">▶ 쇼츠 보기</div>
         </div>
         <div class="portfolio-info">
-          <h4>⚡ 쇼츠 4</h4>
-          <p>트렌디한 숏폼 연출</p>
+          <h4>⚡ 트렌디한 비주얼 숏폼</h4>
+          <p>MZ세대를 겨냥한 감각적인 연출</p>
         </div>
       </a>
  
@@ -1427,8 +1432,8 @@
           <div class="visit-btn">▶ 쇼츠 보기</div>
         </div>
         <div class="portfolio-info">
-          <h4>⚡ 기업 숏폼</h4>
-          <p>브랜드 맞춤형 기업 숏폼 제작</p>
+          <h4>⚡ 비즈니스 전문 기업 숏폼</h4>
+          <p>기업 신뢰도를 높이는 브랜딩 숏폼 제작</p>
         </div>
       </a>
 
@@ -1439,8 +1444,8 @@
           <div class="visit-btn">▶ 쇼츠 보기</div>
         </div>
         <div class="portfolio-info">
-          <h4>⚡ 회사 소개</h4>
-          <p>임팩트 있는 회사 소개 숏폼</p>
+          <h4>⚡ 창의적인 회사 소개 브랜딩</h4>
+          <p>독창적인 시각으로 재해석한 기업 홍보</p>
         </div>
       </a>
 
@@ -1451,8 +1456,8 @@
           <div class="visit-btn">▶ 쇼츠 보기</div>
         </div>
         <div class="portfolio-info">
-          <h4>⚡ 쇼츠 5</h4>
-          <p>다이나믹한 숏폼 구성</p>
+          <h4>⚡ 생생한 공모전 참가 스케치</h4>
+          <p>열정과 도전을 담은 행사 하이라이트 영상</p>
         </div>
       </a>
 
@@ -1463,8 +1468,8 @@
           <div class="visit-btn">▶ 쇼츠 보기</div>
         </div>
         <div class="portfolio-info">
-          <h4>⚡ 쇼츠 6</h4>
-          <p>몰입감 있는 숏폼 비주얼</p>
+          <h4>⚡ 고퀄리티 시설 홍보 크리에이티브</h4>
+          <p>공간의 매력을 극대화한 영상 구성</p>
         </div>
       </a>
 
@@ -1475,8 +1480,8 @@
           <div class="visit-btn">▶ 쇼츠 보기</div>
         </div>
         <div class="portfolio-info">
-          <h4>⚡ 쇼츠 7</h4>
-          <p>브랜드 바이럴 숏폼</p>
+          <h4>⚡ 바이럴 최적화 고효율 영상</h4>
+          <p>높은 도달률을 기록하는 전략적 숏폼</p>
         </div>
       </a>
 
@@ -1487,8 +1492,8 @@
           <div class="visit-btn">▶ 쇼츠 보기</div>
         </div>
         <div class="portfolio-info">
-          <h4>⚡ 쇼츠 8</h4>
-          <p>고효율 SNS 숏폼 제작</p>
+          <h4>⚡ 시선을 압도하는 임팩트 쇼츠</h4>
+          <p>강력한 비주얼로 브랜드 각인 효과</p>
         </div>
       </a>
     </div>
@@ -1532,9 +1537,10 @@
 
         <!-- 🐶 하스펫 -->
         <a class="portfolio-card" href="http://www.haspet.kr" target="_blank" rel="noopener">
-          <div class="portfolio-thumb" style="aspect-ratio:16/9; position:relative; overflow:hidden;">
-            <img src="https://api.microlink.io/?url=https://kinpds-max.github.io/haspet/&screenshot=true&meta=false&embed=screenshot.url" alt="하스펫 캡처" style="width:100%; height:100%; object-fit:cover; object-position: top;">
-            <div class="visit-btn">↗ 바로가기</div>
+          <div class="portfolio-iframe-wrap">
+            <iframe src="https://kinpds-max.github.io/haspet/" loading="lazy" title="하스펫 프리미엄 펫 브랜드"></iframe>
+            <div class="iframe-overlay"></div>
+            <div class="visit-btn">↗ 사이트 방문</div>
           </div>
           <div class="portfolio-type">프리미엄 펫 브랜드</div>
           <div class="portfolio-info">
@@ -1588,8 +1594,8 @@
         </a>
       </div>
 
-      <!-- 📱 앱 및 게임 제작 -->
-      <h3 style="text-align: center; margin-bottom: 30px; font-size: 1.5rem; color: var(--primary);">📱 앱 및 게임 제작</h3>
+      <!-- 📱 나만의 앱 제작 -->
+      <h3 style="text-align: center; margin-bottom: 30px; font-size: 1.5rem; color: var(--primary);">📱 나만의 앱 제작</h3>
       <div class="portfolio-grid" style="margin-bottom: 50px;">
         <!-- 📱 홀리온 -->
         <a class="portfolio-card" href="https://kinpds-max.github.io/holyon/app.html" target="_blank" rel="noopener">
@@ -1619,8 +1625,22 @@
         </a>
       </div>
 
-
+      <!-- 🎮 나만의 게임 제작 -->
+      <h3 style="text-align: center; margin-bottom: 30px; font-size: 1.5rem; color: var(--primary);">🎮 나만의 게임 제작</h3>
       <div class="portfolio-grid">
+        <!-- 🎮 벽돌깨기 -->
+        <a class="portfolio-card" href="https://kinpds-max.github.io/hamom-breakout/" target="_blank" rel="noopener">
+          <div class="portfolio-thumb" style="aspect-ratio:16/9; position:relative; overflow:hidden;">
+            <img src="https://api.microlink.io/?url=https://kinpds-max.github.io/hamom-breakout/&screenshot=true&meta=false&embed=screenshot.url" alt="벽돌깨기 게임" style="width:100%; height:100%; object-fit:cover; object-position: top;">
+            <div class="visit-btn">↗ 게임 시작</div>
+          </div>
+          <div class="portfolio-type">게임 제작</div>
+          <div class="portfolio-info">
+            <h4>🎮 하맘 프리미엄 벽돌깨기</h4>
+            <p>화려한 이펙트와 다양한 아이템의 클래식 벽돌깨기 게임</p>
+          </div>
+        </a>
+
         <!-- 🎮 테트리스 -->
         <a class="portfolio-card" href="https://kinpds-max.github.io/hamom-tetris/" target="_blank" rel="noopener">
           <div class="portfolio-thumb" style="aspect-ratio:16/9; position:relative; overflow:hidden;">
@@ -1683,16 +1703,16 @@
         </div>
       </a>
 
-      <!-- 🚀 하맘ai 포탈모음 -->
+      <!-- 🤖 지능형 AI툴 집합체 -->
       <a class="portfolio-card" href="https://kinpds-max.github.io/aiportal" target="_blank" rel="noopener">
         <div class="portfolio-thumb" style="aspect-ratio:16/9; position:relative; overflow:hidden;">
-          <img src="https://api.microlink.io/?url=https://kinpds-max.github.io/aiportal&screenshot=true&meta=false&embed=screenshot.url" alt="하맘ai 포탈모음 캡처" style="width:100%; height:100%; object-fit:cover; object-position: top;">
+          <img src="https://api.microlink.io/?url=https://kinpds-max.github.io/aiportal&screenshot=true&meta=false&embed=screenshot.url" alt="지능형 AI툴 집합체 캡처" style="width:100%; height:100%; object-fit:cover; object-position: top;">
           <div class="visit-btn">↗ 바로가기</div>
         </div>
-        <div class="portfolio-type">AI Portal</div>
+        <div class="portfolio-type">AI Solution</div>
         <div class="portfolio-info">
-          <h4>🚀 하맘ai 포탈 모음 — 지능형 AI 툴 집합체</h4>
-          <p>엄선된 최신 AI 도구와 리소스를 한눈에 확인하는 포탈 서비스</p>
+          <h4>🚀 지능형 AI툴 집합체 (툴+메모+디데이 하이브리드)</h4>
+          <p>엄선된 최신 AI 도구와 생산성 툴을 결합한 하이브리드 포탈 시스템</p>
         </div>
       </a>
 
