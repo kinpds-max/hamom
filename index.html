@@ -110,13 +110,25 @@
       position: relative;
       overflow: hidden;
     }
-    .hero-bg {
+    .hero-bg-wrapper {
       position: absolute; inset: 0; z-index: 0;
-      background-image: 
-        linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)),
-        url('https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=2000&auto=format&fit=crop');
-      background-size: cover;
-      background-position: center;
+      overflow: hidden; background: #000;
+      pointer-events: none;
+    }
+    .hero-bg-wrapper iframe {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(1.1);
+      /* 구글 크롬/데스크탑에서도 배경이 꽉 차도록 강제 비율 설정 (9:16 Shorts 기준) */
+      width: 100vw;
+      height: 177.77vw;
+      min-height: 100vh;
+      min-width: 56.25vh;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.65), rgba(0,0,0,0.45));
+      z-index: 1;
     }
     .hero-grid {
       position: absolute; inset: 0;
@@ -994,10 +1006,9 @@
   <!-- HERO -->
   <section id="hero">
     <!-- VIDEO BACKGROUND -->
-    <div class="hero-bg-wrapper" style="position: absolute; inset: 0; z-index: 0; overflow: hidden; background: #000;">
-      <iframe src="https://www.youtube.com/embed/iQtt_P6dgL4?autoplay=1&mute=1&loop=1&playlist=iQtt_P6dgL4&controls=0&showinfo=0&autohide=1&modestbranding=1" frameborder="0" allow="autoplay; fullscreen" style="position: absolute; top: 50%; left: 50%; width: max(100vw, 56.25vh); height: max(177.77vw, 100vh); transform: translate(-50%, -50%) scale(1.05); pointer-events: none;"></iframe>
-      <!-- Overlay to make text readable -->
-      <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.4)); z-index: 1;"></div>
+    <div class="hero-bg-wrapper">
+      <iframe src="https://www.youtube.com/embed/iQtt_P6dgL4?autoplay=1&mute=1&loop=1&playlist=iQtt_P6dgL4&controls=0&showinfo=0&autohide=1&modestbranding=1" frameborder="0" allow="autoplay; fullscreen"></iframe>
+      <div class="hero-overlay"></div>
     </div>
     
     <div class="hero-grid" style="z-index: 1; opacity: 0.2;"></div>
