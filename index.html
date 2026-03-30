@@ -1485,18 +1485,6 @@
         </div>
       </a>
 
-      <!-- ⚡ 쇼츠 7 -->
-      <a class="portfolio-card" href="https://youtube.com/shorts/Ni0tWrufC8M" rel="noopener">
-        <div class="portfolio-thumb" style="aspect-ratio:9/16; position:relative; overflow:hidden;">
-          <img src="https://img.youtube.com/vi/Ni0tWrufC8M/maxresdefault.jpg" alt="쇼츠 7" style="width:100%; height:100%; object-fit:cover;">
-          <div class="visit-btn">▶ 쇼츠 보기</div>
-        </div>
-        <div class="portfolio-info">
-          <h4>⚡ 바이럴 최적화 고효율 영상</h4>
-          <p>높은 도달률을 기록하는 전략적 숏폼</p>
-        </div>
-      </a>
-
       <!-- ⚡ 쇼츠 8 -->
       <a class="portfolio-card" href="https://youtube.com/shorts/P_6-KwK4pI8" rel="noopener">
         <div class="portfolio-thumb" style="aspect-ratio:9/16; position:relative; overflow:hidden;">
@@ -2603,6 +2591,7 @@
   </a>
 
   <!-- FULLSCREEN PORTRAIT INIT -->
+  <button id="fsCloseBtn" style="display:none; position:fixed; top:15px; right:15px; z-index:100000; background:rgba(0,0,0,0.6); color:#fff; border:1px solid rgba(255,255,255,0.4); border-radius:30px; padding:8px 16px; font-weight:700; font-size:0.85rem; cursor:pointer; backdrop-filter:blur(8px); box-shadow:0 4px 15px rgba(0,0,0,0.2); transition:all 0.3s;" onclick="if(document.exitFullscreen) document.exitFullscreen(); else if(document.webkitExitFullscreen) document.webkitExitFullscreen();" onmouseover="this.style.background='rgba(239,68,68,0.8)'" onmouseout="this.style.background='rgba(0,0,0,0.6)'">✕ 화면 닫기</button>
   <script>
     // 모바일에서 첫 진입 시 전체화면 + 세로(portrait) 고정 요청
     (function() {
@@ -2636,6 +2625,21 @@
         document.addEventListener('touchstart', requestFullscreenPortrait, { once: true });
         document.addEventListener('click', requestFullscreenPortrait, { once: true });
       }
+
+      // 전체화면 상태 변경 감지하여 닫기 버튼 표시/숨김
+      function onFsChange() {
+        var isFs = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+        var btn = document.getElementById('fsCloseBtn');
+        if(isFs) {
+          btn.style.display = 'block';
+        } else {
+          btn.style.display = 'none';
+        }
+      }
+      document.addEventListener('fullscreenchange', onFsChange);
+      document.addEventListener('webkitfullscreenchange', onFsChange);
+      document.addEventListener('mozfullscreenchange', onFsChange);
+      document.addEventListener('MSFullscreenChange', onFsChange);
     })();
   </script>
 
