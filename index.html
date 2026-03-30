@@ -385,7 +385,7 @@
       box-shadow: 0 20px 50px rgba(0,0,0,0.03);
     }
     .process-row {
-      display: grid; grid-template-columns: 120px 1fr;
+      display: grid; grid-template-columns: 140px 320px 1fr;
       border-bottom: 1px solid var(--border);
       transition: background 0.3s;
     }
@@ -396,20 +396,29 @@
       background: var(--accent-bg); border-right: 1px solid var(--border);
       color: var(--primary);
     }
+    .process-col-title {
+      padding: 40px; display: flex; align-items: center; justify-content: center;
+      background: #fff; border-right: 1px solid var(--border);
+      text-align: center;
+    }
+    .process-col-title h4 { font-size: 1.6rem; font-weight: 900; color: var(--text); letter-spacing: -1px; }
     .process-row:hover .process-col-num { background: var(--primary); color: #fff; }
     .process-num-label { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; line-height: 1; margin-bottom: 4px; }
     .process-step-tag { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; opacity: 0.6; }
-    .process-col-content { padding: 40px 50px; text-align: left; display: flex; flex-direction: column; justify-content: center; }
-    .process-col-content h4 { font-size: 1.25rem; font-weight: 800; margin-bottom: 10px; color: var(--text); }
-    .process-col-content p { font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
+    .process-col-desc { padding: 40px 60px; text-align: left; display: flex; align-items: center; }
+    .process-col-desc p { font-size: 1.05rem; color: var(--muted); line-height: 1.8; margin: 0; }
 
+    @media (max-width: 900px) {
+      .process-row { grid-template-columns: 100px 200px 1fr; }
+      .process-col-title h4 { font-size: 1.2rem; }
+      .process-col-desc { padding: 25px 30px; }
+      .process-col-desc p { font-size: 0.9rem; }
+    }
     @media (max-width: 768px) {
       .process-row { grid-template-columns: 80px 1fr; }
-      .process-col-num { padding: 30px 0; }
-      .process-num-label { font-size: 1.6rem; }
-      .process-col-content { padding: 25px 30px; }
-      .process-col-content h4 { font-size: 1.1rem; }
-      .process-col-content p { font-size: 0.85rem; }
+      .process-col-title { grid-column: 2; border-right: none; padding: 20px 30px 10px; justify-content: flex-start; text-align: left; }
+      .process-col-desc { grid-column: 2; padding: 0 30px 25px; }
+      .process-col-num { grid-row: span 2; }
     }
 
     /* ── PORTFOLIO ── */
@@ -1376,8 +1385,10 @@
           <span class="process-num-label">01</span>
           <span class="process-step-tag">Step</span>
         </div>
-        <div class="process-col-content">
+        <div class="process-col-title">
           <h4>상담 & 기획</h4>
+        </div>
+        <div class="process-col-desc">
           <p>클라이언트 니즈 파악 후 맞춤형 전략과 컨셉을 기획합니다.</p>
         </div>
       </div>
@@ -1386,8 +1397,10 @@
           <span class="process-num-label">02</span>
           <span class="process-step-tag">Step</span>
         </div>
-        <div class="process-col-content">
+        <div class="process-col-title">
           <h4>디자인 & 스크립트</h4>
+        </div>
+        <div class="process-col-desc">
           <p>스토리보드, 디자인 시안, 스크립트를 제작하고 확인합니다.</p>
         </div>
       </div>
@@ -1396,8 +1409,10 @@
           <span class="process-num-label">03</span>
           <span class="process-step-tag">Step</span>
         </div>
-        <div class="process-col-content">
+        <div class="process-col-title">
           <h4>촬영 & 제작</h4>
+        </div>
+        <div class="process-col-desc">
           <p>첨단 AI 기술을 결합하여 더욱 혁신적인 고품질 촬영 및 디자인 결과물을 만들어냅니다.</p>
         </div>
       </div>
@@ -1406,8 +1421,10 @@
           <span class="process-num-label">04</span>
           <span class="process-step-tag">Step</span>
         </div>
-        <div class="process-col-content">
+        <div class="process-col-title">
           <h4>편집 & 후반작업</h4>
+        </div>
+        <div class="process-col-desc">
           <p>색보정, 사운드, 모션그래픽 등 완성도 높은 후반 작업.</p>
         </div>
       </div>
@@ -1416,8 +1433,10 @@
           <span class="process-num-label">05</span>
           <span class="process-step-tag">Step</span>
         </div>
-        <div class="process-col-content">
+        <div class="process-col-title">
           <h4>납품 & 피드백</h4>
+        </div>
+        <div class="process-col-desc">
           <p>최종 검수 후 납품, 수정 및 지속적인 AS를 제공합니다.</p>
         </div>
       </div>
