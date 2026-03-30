@@ -693,17 +693,17 @@
       }
       .kakao-float .icon { font-size: 1.8rem; }
 
-      /* Compact Services Grid for Mobile */
-      .services-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-      .service-card { padding: 18px 10px; border-radius: 20px; }
-      .service-icon { width: 48px; height: 48px; font-size: 1.5rem; margin-bottom: 10px; border-radius: 15px; }
-      .service-name { font-size: 0.92rem; font-weight: 700; }
+      /* Compact Services Grid for Mobile - 3열 */
+      .services-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+      .service-card { padding: 14px 6px; border-radius: 16px; }
+      .service-icon { width: 40px; height: 40px; font-size: 1.3rem; margin-bottom: 8px; border-radius: 12px; }
+      .service-name { font-size: 0.78rem; font-weight: 700; }
       
-      .service-card.expanded { grid-column: span 2; padding: 35px 20px; }
-      .service-card.expanded .service-name { font-size: 1.2rem; }
-      .service-card.expanded .service-desc { font-size: 0.82rem; }
+      .service-card.expanded { grid-column: span 3; padding: 28px 16px; }
+      .service-card.expanded .service-name { font-size: 1.1rem; }
+      .service-card.expanded .service-desc { font-size: 0.8rem; }
 
-      .ai-divider-label { font-size: 0.8rem; background: #fff; color: var(--primary); font-weight: 900; padding: 0 12px; }
+      .ai-divider-label { font-size: 0.75rem; background: #fff; color: var(--primary); font-weight: 900; padding: 0 10px; }
       .section-desc { text-wrap: balance; text-align: center; margin: 0 auto 30px; max-width: 90%; }
       
       /* Mobile Table Hint */
@@ -731,20 +731,21 @@
         0%, 100% { transform: translateX(0) scale(1); opacity: 1; } 
         50% { transform: translateX(12px) scale(1.1); opacity: 0.8; } 
       }
-      .portfolio-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+      /* 포트폴리오 3열 */
+      .portfolio-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; }
       
-      .ai-column-grid { grid-template-columns: repeat(2, 1fr) !important; }
-      .portfolio-info { padding: 12px; }
-      .portfolio-info h4 { font-size: 0.9rem; margin-bottom: 4px; }
-      .portfolio-info p { font-size: 0.75rem; }
-      .portfolio-type { font-size: 0.65rem; padding: 3px 10px; top: 10px; left: 10px; }
+      .ai-column-grid { grid-template-columns: repeat(3, 1fr) !important; }
+      .portfolio-info { padding: 8px; }
+      .portfolio-info h4 { font-size: 0.75rem; margin-bottom: 2px; }
+      .portfolio-info p { font-size: 0.65rem; }
+      .portfolio-type { font-size: 0.6rem; padding: 2px 8px; top: 6px; left: 6px; }
 
-      /* Why section mobile optimization */
-      .why-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
-      .why-card { padding: 24px 15px; text-align: center; display: flex; flex-direction: column; align-items: center; }
-      .why-card h4 { font-size: 0.95rem; margin-bottom: 8px; }
-      .why-card p { font-size: 0.78rem; line-height: 1.6; text-wrap: balance; }
-      .why-icon { margin-bottom: 12px; font-size: 1.8rem; }
+      /* Why section mobile - 3열 */
+      .why-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; }
+      .why-card { padding: 16px 8px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+      .why-card h4 { font-size: 0.8rem; margin-bottom: 6px; }
+      .why-card p { font-size: 0.7rem; line-height: 1.5; text-wrap: balance; }
+      .why-icon { margin-bottom: 8px; font-size: 1.6rem; }
     }
 
     /* Gradient card backgrounds */
@@ -2600,6 +2601,43 @@
   <a href="https://accounts.kakao.com/login/?continue=https%3A%2F%2Fpf.kakao.com%2F_YdGxhX%2Fchat#login" target="_blank" class="kakao-float" aria-label="카카오톡 빠른 상담">
     <span class="icon">💬</span>
   </a>
+
+  <!-- FULLSCREEN PORTRAIT INIT -->
+  <script>
+    // 모바일에서 첫 진입 시 전체화면 + 세로(portrait) 고정 요청
+    (function() {
+      var triggered = false;
+
+      function requestFullscreenPortrait() {
+        if (triggered) return;
+        triggered = true;
+
+        var el = document.documentElement;
+
+        // 전체화면 요청
+        var fsRequest = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+        if (fsRequest) {
+          fsRequest.call(el).then(function() {
+            // 전체화면 성공 후 세로 방향 고정
+            if (screen.orientation && screen.orientation.lock) {
+              screen.orientation.lock('portrait').catch(function(e) {
+                console.log('Orientation lock not supported:', e);
+              });
+            }
+          }).catch(function(e) {
+            console.log('Fullscreen request failed:', e);
+          });
+        }
+      }
+
+      // 모바일인 경우에만 실행
+      if (/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
+        // 첫 터치/클릭 시 전체화면 요청 (브라우저 보안: 사용자 제스처 필요)
+        document.addEventListener('touchstart', requestFullscreenPortrait, { once: true });
+        document.addEventListener('click', requestFullscreenPortrait, { once: true });
+      }
+    })();
+  </script>
 
   <!-- GLOBAL TRANSLATION WIDGET -->
   <div class="gtranslate_wrapper"></div>
