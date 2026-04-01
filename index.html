@@ -300,8 +300,31 @@
     #services { background: #fff; padding-bottom: 120px; }
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px; max-width: 1200px; margin: 0 auto;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 15px; max-width: 1300px; margin: 0 auto;
+    }
+    @media (min-width: 1024px) {
+      .services-grid {
+        grid-template-columns: repeat(6, 1fr) !important;
+        max-width: 1400px !important;
+      }
+      .ai-column-grid {
+        grid-template-columns: repeat(6, 1fr) !important;
+      }
+      .service-card {
+        padding: 24px 12px !important;
+        border-radius: 20px !important;
+      }
+      .service-name {
+        font-size: 0.88rem !important;
+        letter-spacing: -0.5px !important;
+      }
+      .service-icon {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 1.4rem !important;
+        margin-bottom: 12px !important;
+      }
     }
     .service-card {
       background: var(--card-bg);
