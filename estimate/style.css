@@ -1,0 +1,359 @@
+:root {
+    --apple-blue: #007AFF;
+    --apple-bg: #F5F5F7;
+    --apple-card-bg: rgba(255, 255, 255, 0.72);
+    --apple-sidebar-bg: rgba(30, 30, 30, 0.85);
+    --apple-text: #1d1d1f;
+    --apple-text-secondary: #86868b;
+    --apple-border: rgba(0, 0, 0, 0.1);
+    --apple-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+    --radius-large: 22px;
+    --radius-medium: 12px;
+    
+    /* Paper Defaults */
+    --p-accent: #007AFF;
+    --p-color: #000000;
+    --p-bg: #FFFFFF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Pretendard", "Noto Sans KR", sans-serif;
+}
+
+body {
+    background-color: var(--apple-bg);
+    color: var(--apple-text);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+    padding: 16px;
+    gap: 16px;
+}
+
+/* Apple Sidebar */
+.sidebar {
+    width: 240px;
+    background: var(--apple-sidebar-bg);
+    backdrop-filter: blur(40px);
+    border-radius: var(--radius-large);
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    z-index: 100;
+}
+
+.logo-section {
+    padding: 0 10px 40px;
+}
+
+.logo-text h1 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.logo-text span {
+    font-size: 11px;
+    opacity: 0.5;
+    text-transform: uppercase;
+}
+
+.main-nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.nav-group-title {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin: 24px 0 8px 12px;
+    opacity: 0.4;
+    color: #fff;
+}
+
+.nav-btn, .action-btn {
+    width: 100%;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.nav-btn {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.nav-btn.active {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.action-btn {
+    background: var(--apple-blue);
+    color: white;
+    margin-top: 6px;
+}
+
+.action-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 122, 255, 0.3);
+}
+
+.action-btn.secondary { background: rgba(255, 255, 255, 0.1); }
+.action-btn.email { background: #34C759; }
+
+.template-dropdown {
+    width: 100%;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: white;
+    font-size: 12px;
+    outline: none;
+}
+
+.color-picker-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    margin-top: 4px;
+}
+
+#theme-color {
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+/* Main Content Surface */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.top-bar {
+    height: 60px;
+    background: var(--apple-card-bg);
+    backdrop-filter: blur(20px);
+    border-radius: var(--radius-medium);
+    border: 1px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    box-shadow: var(--apple-shadow);
+}
+
+.workspace {
+    flex: 1;
+    display: flex;
+    gap: 16px;
+    overflow: hidden;
+}
+
+.form-panel {
+    width: 440px;
+    background: var(--apple-card-bg);
+    backdrop-filter: blur(20px);
+    border-radius: var(--radius-medium);
+    border: 1px solid white;
+    padding: 30px;
+    overflow-y: auto;
+    box-shadow: var(--apple-shadow);
+}
+
+.form-panel h2 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    letter-spacing: -0.3px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--apple-text-secondary);
+    margin-bottom: 4px;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    background: white;
+    border-color: var(--apple-blue);
+    box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1);
+}
+
+.items-table-editor {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.items-table-editor th, .items-table-editor td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.btn-remove {
+    width: 24px;
+    height: 24px;
+    background: #FF3B30;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Preview Panel - THE STAGE */
+.preview-panel {
+    flex: 1;
+    background: #EBEBEB;
+    border-radius: var(--radius-medium);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.preview-scroll {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Fixing the "Cut Off" by using flex and scaling */
+/* Scaling quality fix */
+#print-area {
+    background: var(--p-bg);
+    color: var(--p-color);
+    width: 210mm;
+    min-height: 297mm;
+    padding: 60px;
+    box-shadow: 0 40px 120px rgba(0,0,0,0.12);
+    transform-origin: top center;
+    margin-bottom: 40px;
+    backface-visibility: hidden;
+    will-change: transform;
+}
+
+.paper-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--p-color);
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.paper-title { font-size: 36px; font-weight: 800; letter-spacing: 10px; }
+.total-won { color: var(--p-accent); font-weight: 800; font-size: 28px; }
+
+/* 20 Templates Design (Simplified for Maintenance) */
+.paper.modern { --p-accent: var(--p-accent); }
+.paper.formal { font-family: 'Noto Sans KR', serif; border: 4px double var(--p-color); }
+.paper.minimal { border: none !important; padding: 60px; }
+.paper.corporate { border: none; }
+.paper.corporate .paper-header { background: var(--p-accent); color: white; padding: 30px; }
+.paper.tech { --p-bg: #000; --p-color: var(--p-accent); }
+.paper.luxury { --p-bg: #0c0c0c; --p-color: #d4af37; --p-accent: #d4af37; border: 8px solid #d4af37; }
+.paper.industrial { border: 15px solid #333; }
+.paper.creative { border-left: 60px solid var(--p-accent); }
+.paper.royal { border-radius: 40px; border: 5px solid var(--p-accent); }
+.paper.soft { border-radius: 40px; --p-bg: #fffafa; }
+.paper.gradient .paper-header { background: linear-gradient(135deg, var(--p-accent), #000); color: white; border: none; }
+
+/* Table Styles on Paper */
+.paper table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    table-layout: fixed;
+    word-break: break-all;
+}
+.paper th, .paper td { 
+    border: 1px solid var(--p-color); 
+    padding: 12px 8px; 
+    text-align: center; 
+    font-size: 13px; 
+    line-height: 1.4;
+}
+.paper th { background: rgba(0, 0, 0, 0.02); font-weight: 700; }
+.provider-table th { width: 80px; }
+
+.total-display {
+    border: 2px solid var(--p-color);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 0;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* Animations */
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+#print-area { animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1); }

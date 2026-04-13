@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하맘 초대형 비교견적서 시스템 - Hamom Comparison System</title>
+    <meta name="description" content="전문적인 하맘견적서 시스템. PDF/HTML 저장 기능을 지원합니다.">
+    <!-- Google Fonts: Inter and Noto Sans KR -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Library for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo-section">
+                <div class="logo-icon">H</div>
+                <div class="logo-text">
+                    <h1>하맘 초대형 비교견적서</h1>
+                    <span>Quotations for Hamom</span>
+                </div>
+            </div>
+            
+            <nav class="main-nav">
+                <button class="nav-btn active" data-tab="editor">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    <span>견적서 작성</span>
+                </button>
+                <div class="nav-group-title">수행 작업</div>
+                <button class="action-btn" id="btn-export-pdf">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    <span>PDF 저장</span>
+                </button>
+                <button class="action-btn secondary" id="btn-save-html">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    <span>HTML 저장</span>
+                </button>
+                <button class="action-btn email" id="btn-send-email">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <span>이메일 발송</span>
+                </button>
+                
+                <div class="nav-group-title">양식 선택 (총 20종)</div>
+                <select id="template-select" class="template-dropdown">
+                    <optgroup label="핵심 양식">
+                        <option value="modern">모던 (기본)</option>
+                        <option value="formal">클래식 정형</option>
+                        <option value="minimal">미니멀 클린</option>
+                        <option value="corporate">기업 신뢰형</option>
+                        <option value="simple">심플 베이직</option>
+                    </optgroup>
+                    <optgroup label="디자인 특화">
+                        <option value="elegant">엘레강스 (명조)</option>
+                        <option value="tech">테크 (다크)</option>
+                        <option value="eco">에코 그린</option>
+                        <option value="luxury">럭셔리 골드</option>
+                        <option value="blueprint">블루프린트</option>
+                    </optgroup>
+                    <optgroup label="산업별 양식">
+                        <option value="creative">크리에이티브</option>
+                        <option value="industrial">인더스트리얼</option>
+                        <option value="medical">메디컬 클린</option>
+                        <option value="retro">레트로 감성</option>
+                        <option value="compact">컴팩트 리스트</option>
+                    </optgroup>
+                    <optgroup label="프리미엄 스타일">
+                        <option value="royal">로열 클래식</option>
+                        <option value="soft">소프트 파스텔</option>
+                        <option value="gradient">비코드 그라디언트</option>
+                        <option value="outline">아웃라인 볼드</option>
+                        <option value="abstract">추상 기하학</option>
+                    </optgroup>
+                </select>
+                <div class="nav-group-title">커스텀 색상</div>
+                <div class="color-picker-container">
+                    <input type="color" id="theme-color" value="#007AFF">
+                    <span>브랜드 색상 선택</span>
+                </div>
+            </nav>
+
+            <div class="contact-info">
+                <div class="phone">1660-1195</div>
+                <div class="label">하맘 시스템 고객센터</div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="breadcrumb">홈 / 견적서 작성</div>
+                <div class="user-profile">
+                    <div class="status-indicator online"></div>
+                    <span>시스템 활성 중</span>
+                </div>
+            </header>
+
+            <section class="workspace">
+                <!-- Data Entry Panel -->
+                <div class="form-panel card">
+                    <div class="panel-header">
+                        <h2>기본 정보 입력</h2>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>상호/수신인</label>
+                            <input type="text" id="client-name" placeholder="수신업체명을 입력하세요" value="테스트 귀하">
+                        </div>
+                        <div class="form-group">
+                            <label>발행일자</label>
+                            <input type="date" id="doc-date">
+                        </div>
+                        <div class="form-group full-width">
+                            <label>견적 명칭</label>
+                            <input type="text" id="quote-title" placeholder="견적서 제목을 입력하세요" value="하맘 서비스 제공 견적서">
+                        </div>
+                        <div class="form-group full-width">
+                            <label>특이사항 (줄바꿈 가능)</label>
+                            <textarea id="notes-input" rows="3" placeholder="견적 유효기간, 납기, 결제조건 등을 입력하세요">
+- 견적 유효기간: 발행일로부터 30일
+- 납기: 계약 후 14일 이내
+- 결제조건: 현금 (계약금 30%, 잔금 70%)</textarea>
+                        </div>
+                    </div>
+
+                    <div class="panel-header" style="margin-top: 20px;">
+                        <h2>공급자 정보 등록</h2>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>상호명</label>
+                            <input type="text" id="reg-company" value="하맘 (HAMOM)">
+                        </div>
+                        <div class="form-group">
+                            <label>사업자번호</label>
+                            <input type="text" id="reg-number" value="123-45-67890">
+                        </div>
+                        <div class="form-group">
+                            <label>대표자명</label>
+                            <input type="text" id="reg-ceo" value="권하맘">
+                        </div>
+                        <div class="form-group">
+                            <label>연락처</label>
+                            <input type="text" id="reg-tel" value="1660-1195">
+                        </div>
+                        <div class="form-group full-width">
+                            <label>주소</label>
+                            <input type="text" id="reg-address" value="서울특별시 강남구 테헤란로 123">
+                        </div>
+                        <div class="form-group">
+                            <label>로고 등록</label>
+                            <input type="file" id="logo-upload" accept="image/*" class="file-input">
+                        </div>
+                        <div class="form-group">
+                            <label>인감(도장) 등록</label>
+                            <input type="file" id="stamp-upload" accept="image/*" class="file-input">
+                        </div>
+                    </div>
+
+                    <div class="items-section">
+                        <div class="section-title">
+                            <h3>품목 리스트</h3>
+                            <button class="add-item-btn" id="btn-add-item">+ 품목 추가</button>
+                        </div>
+                        <table class="items-table-editor">
+                            <thead>
+                                <tr>
+                                    <th>품목명</th>
+                                    <th>수량</th>
+                                    <th>단가</th>
+                                    <th>합계</th>
+                                    <th>삭제</th>
+                                </tr>
+                            </thead>
+                            <tbody id="items-body">
+                                <!-- Dynamic Rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Live Preview Panel (Mock Print View) -->
+                <div class="preview-panel">
+                    <div class="preview-scroll">
+                        <div id="print-area" class="paper">
+                            <!-- Paper starts here -->
+                            <div class="paper-header">
+                                <div class="paper-title">견 적 서</div>
+                                <div class="paper-logo">
+                                    <img src="hamom-logo.png" alt="HAMOM Logo" style="height: 60px;">
+                                </div>
+                            </div>
+
+                            <div class="paper-summary">
+                                <div class="paper-client-info">
+                                    <div class="client-rect">
+                                        <span id="p-client-name">테스트 귀하</span> <br>
+                                        <span class="subtext">아래와 같이 견적합니다.</span>
+                                    </div>
+                                    <div class="date-rect">
+                                        No. <span id="p-doc-id">H-2026-0331</span> <br>
+                                        일자: <span id="p-doc-date">2026.03.31</span>
+                                    </div>
+                                </div>
+                                <div class="paper-provider-info">
+                                    <table class="provider-table">
+                                        <tr>
+                                            <th rowspan="4" class="v-text">공급자</th>
+                                            <th>등록번호</th>
+                                            <td colspan="3"><span id="p-reg-number">123-45-67890</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>상 호</th>
+                                            <td><span id="p-reg-company">하맘 (HAMOM)</span></td>
+                                            <th>대표자</th>
+                                            <td class="ceo-cell">
+                                                <span id="p-reg-ceo">권하맘</span> (인)
+                                                <div class="stamp-container">
+                                                    <img id="p-stamp-img" src="" alt="" style="display: none;">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>주 소</th>
+                                            <td colspan="3"><span id="p-reg-address">서울특별시 강남구 테헤란로 123</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>연락처</th>
+                                            <td colspan="3">T. <span id="p-reg-tel">1660-1195</span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="total-display">
+                                합계금액 (일천이백만 원정) <span class="total-won">₩ <span id="p-total-amount">0</span></span>
+                            </div>
+
+                            <table class="paper-items-table">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">번호</th>
+                                        <th width="40%">품목 및 규격</th>
+                                        <th width="10%">수량</th>
+                                        <th width="20%">단가</th>
+                                        <th width="25%">금액</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="p-items-body">
+                                    <!-- Items go here -->
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4" class="text-right">소계</td>
+                                        <td class="text-right" id="p-subtotal">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" class="text-right">부가가치세 (10%)</td>
+                                        <td class="text-right" id="p-tax">0</td>
+                                    </tr>
+                                    <tr class="grand-total-row">
+                                        <td colspan="4" class="text-right">합계</td>
+                                        <td class="text-right bold" id="p-grand-total">0</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                            <div class="paper-footer">
+                                <div class="notes">
+                                    <strong>[특이사항]</strong>
+                                    <pre id="p-notes" style="font-family: inherit; margin-top: 10px;"></pre>
+                                </div>
+                                <div class="stamp-section">
+                                    특기사항 외 별도 협의 가능합니다. <br>
+                                    <strong>하맘견적서 시스템 1660-1195</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
